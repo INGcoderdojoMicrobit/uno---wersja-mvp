@@ -19,6 +19,16 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "myImage2"
     },
+    "image6": {
+        "data": "hwQQABAAAAD//////////y/1////////j/f//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////3/4////////X/L//////////w==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage4"
+    },
+    "image5": {
+        "data": "hwQQACAAAAAAEREREREREREREREREREAEBHxERERERERERERERERARER8RERERERERERERERERER8f//ERERERERERERERERERHxERERERFxd3d3ERERERER8RERERERcXd3dxERERERERERERFVVXV3d3cRERERERHxHxERVVV1d3d3iBERERERHx8REVVVVYWIiIgRERER8REfERFVIiKCiIiIERERER8RHxERESIigoiIiBERERH/////EREiIiISEREREREREREfERERIiIiEhERERERERERERERERERERERERERERAREREREREREREREREREQEAEREREREREREREREREREA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "karta_plus4"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",

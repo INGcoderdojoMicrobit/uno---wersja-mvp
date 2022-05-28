@@ -143,6 +143,60 @@ namespace myImages {
 .22222222222222.
 ..222222222222..
 `;
+            case "image6":
+            case "myImage4":return img`
+f f f f f f f f f f f f f f f f 
+f 2 8 f f f f f f f f f f f f f 
+f 5 7 f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f 7 5 f 
+f f f f f f f f f f f f f 8 2 f 
+f f f f f f f f f f f f f f f f 
+`;
+            case "image5":
+            case "karta_plus4":return img`
+..111111111111..
+.11111111111111.
+1111111111ff1111
+111f11111f1f1111
+111f1111f11f1111
+1fffff1f111f1111
+111f111ffffff111
+111f1111111f1111
+11111111111f1111
+11111111111f1111
+1111111111111111
+1111111111111111
+1111115555111111
+1111115555111111
+1111115552222111
+1111115552222111
+1111115552222111
+1111777752222111
+1111777752222111
+1111777788822111
+1111777788822111
+1111777788811111
+1111777788811111
+1111777788811111
+1111111888811111
+1111111888811111
+1111111111111111
+1111111111111111
+1111111111111111
+1111111111111111
+.11111111111111.
+..111111111111..
+`;
         }
         return null;
     })
