@@ -42,6 +42,11 @@ for (let index = 0; index <= 8; index++) {
     } else {
         mySprite = sprites.create(assets.image`myImage0`, SpriteKind.Player)
         mySprite = sprites.create(assets.image`karta_plus4`, SpriteKind.Player)
+        mySprite = sprites.create(assets.image`zmiana_koloru`, SpriteKind.Player)
+        mySprite = sprites.create(assets.image`Zmiana_kierunku_green`, SpriteKind.Player)
+        mySprite = sprites.create(assets.image`Zmiana_kierunku_red`, SpriteKind.Player)
+        mySprite = sprites.create(assets.image`Zmiana_kierunku_yellow`, SpriteKind.Player)
+        mySprite = sprites.create(assets.image`Zmiana_kierunku_blue`, SpriteKind.Player)
     }
     mySprite.setPosition(8 + index * 18, 16)
 }
