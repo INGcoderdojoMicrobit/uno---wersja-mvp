@@ -2,7 +2,8 @@
     "name": "Uno - wersja MVP",
     "description": "",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "arcade-text": "github:microsoft/arcade-text#v1.3.0"
     },
     "files": [
         "main.blocks",
@@ -16,7 +17,7 @@
         "test.ts"
     ],
     "targetVersions": {
-        "target": "1.8.23",
+        "target": "1.8.26",
         "targetId": "arcade"
     },
     "supportedTargets": [

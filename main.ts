@@ -168,3 +168,13 @@ assets.animation`selector`,
 50,
 true
 )
+let gracz1 = sprites.create(assets.image`duck5`, SpriteKind.Enemy)
+gracz1.setPosition(9, 110)
+let textSprite = textsprite.create("Player1")
+textSprite.setPosition(20, 90)
+let kupka1 = sprites.create(assets.image`4green`, SpriteKind.Enemy)
+kupka1.setPosition(77, 78)
+let textSprite2 = textsprite.create("dobierz:")
+textSprite2.setPosition(135, 96)
+let textSprite3 = textsprite.create("6")
+textSprite3.setPosition(145, 106)
