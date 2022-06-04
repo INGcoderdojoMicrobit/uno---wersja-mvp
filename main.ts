@@ -11,10 +11,10 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    for (let value of sprites.allOfKind(SpriteKind.Player)) {
+    for (let value2 of sprites.allOfKind(SpriteKind.Player)) {
         for (let index = 0; index <= 5; index++) {
-            value.x += 3 * -1
-            if (value.x >= 0 && value.x <= scene.screenWidth()) {
+            value2.x += 3 * -1
+            if (value2.x >= 0 && value2.x <= scene.screenWidth()) {
                 pause(10)
             }
         }
@@ -22,8 +22,8 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 function doShuffle () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Player)
-    for (let index = 0; index <= 19; index++) {
-        kartalosowana = randint(0, 34)
+    for (let index2 = 0; index2 <= 19; index2++) {
+        kartalosowana = randint(0, 54)
         mySprite = sprites.create(assets.image`1blue`, SpriteKind.Player)
         if (kartalosowana == 0) {
             mySprite.setImage(assets.image`plus4`)
@@ -95,27 +95,67 @@ function doShuffle () {
             mySprite.setImage(assets.image`6green`)
         } else if (kartalosowana == 34) {
             mySprite.setImage(assets.image`7green`)
+        } else if (kartalosowana == 35) {
+            mySprite.setImage(assets.image`8green`)
+        } else if (kartalosowana == 36) {
+            mySprite.setImage(assets.image`8blue`)
+        } else if (kartalosowana == 37) {
+            mySprite.setImage(assets.image`8yellow`)
+        } else if (kartalosowana == 38) {
+            mySprite.setImage(assets.image`8red`)
+        } else if (kartalosowana == 39) {
+            mySprite.setImage(assets.image`9green`)
+        } else if (kartalosowana == 40) {
+            mySprite.setImage(assets.image`9blue`)
+        } else if (kartalosowana == 41) {
+            mySprite.setImage(assets.image`9yellow`)
+        } else if (kartalosowana == 42) {
+            mySprite.setImage(assets.image`9red`)
+        } else if (kartalosowana == 43) {
+            mySprite.setImage(assets.image`0green`)
+        } else if (kartalosowana == 44) {
+            mySprite.setImage(assets.image`0blue`)
+        } else if (kartalosowana == 45) {
+            mySprite.setImage(assets.image`0yellow`)
+        } else if (kartalosowana == 46) {
+            mySprite.setImage(assets.image`0red`)
+        } else if (kartalosowana == 47) {
+            mySprite.setImage(assets.image`blokada_red`)
+        } else if (kartalosowana == 48) {
+            mySprite.setImage(assets.image`blokada_green`)
+        } else if (kartalosowana == 49) {
+            mySprite.setImage(assets.image`blokada_yellow`)
+        } else if (kartalosowana == 50) {
+            mySprite.setImage(assets.image`plus2yellow`)
+        } else if (kartalosowana == 51) {
+            mySprite.setImage(assets.image`plus2red`)
+        } else if (kartalosowana == 52) {
+            mySprite.setImage(assets.image`plus2blue`)
+        } else if (kartalosowana == 53) {
+            mySprite.setImage(assets.image`plus2green`)
+        } else if (kartalosowana == 54) {
+            mySprite.setImage(assets.image`plus4`)
         } else {
             mySprite.setImage(assets.image`myImage`)
         }
-        mySprite.setPosition(8 + index * 18, 16)
+        mySprite.setPosition(8 + index2 * 18, 16)
     }
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     doMoveRight()
 })
 function doMoveRight () {
-    for (let index = 0; index <= sprites.allOfKind(SpriteKind.Player).length - 1; index++) {
-        value = sprites.allOfKind(SpriteKind.Player)[sprites.allOfKind(SpriteKind.Player).length - 1 - index]
-        for (let index = 0; index <= 5; index++) {
-            value.x += 3 * 1
-            if (value.x >= 0 && value.x <= scene.screenWidth()) {
+    for (let index3 = 0; index3 <= sprites.allOfKind(SpriteKind.Player).length - 1; index3++) {
+        value3 = sprites.allOfKind(SpriteKind.Player)[sprites.allOfKind(SpriteKind.Player).length - 1 - index3]
+        for (let index4 = 0; index4 <= 5; index4++) {
+            value3.x += 3 * 1
+            if (value3.x >= 0 && value3.x <= scene.screenWidth()) {
                 pause(10)
             }
         }
     }
 }
-let value: Sprite = null
+let value3: Sprite = null
 let mySprite: Sprite = null
 let kartalosowana = 0
 doShuffle()
