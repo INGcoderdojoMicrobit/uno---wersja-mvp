@@ -25,119 +25,7 @@ function doShuffle () {
     for (let index2 = 0; index2 <= 19; index2++) {
         kartalosowana = randint(0, 54)
         mySprite = sprites.create(assets.image`1blue`, SpriteKind.Player)
-        if (kartalosowana == 0) {
-            mySprite.setImage(assets.image`plus4`)
-        } else if (kartalosowana == 1) {
-            mySprite.setImage(assets.image`zmiana_koloru`)
-        } else if (kartalosowana == 2) {
-            mySprite.setImage(assets.image`Zmiana_kierunku_green`)
-        } else if (kartalosowana == 3) {
-            mySprite.setImage(assets.image`Zmiana_kierunku_red`)
-        } else if (kartalosowana == 4) {
-            mySprite.setImage(assets.image`Zmiana_kierunku_yellow`)
-        } else if (kartalosowana == 5) {
-            mySprite.setImage(assets.image`Zmiana_kierunku_blue`)
-        } else if (kartalosowana == 6) {
-            mySprite.setImage(assets.image`blokada_blue`)
-        } else if (kartalosowana == 7) {
-            mySprite.setImage(assets.image`1blue`)
-        } else if (kartalosowana == 8) {
-            mySprite.setImage(assets.image`2blue`)
-        } else if (kartalosowana == 9) {
-            mySprite.setImage(assets.image`3blue`)
-        } else if (kartalosowana == 10) {
-            mySprite.setImage(assets.image`4blue`)
-        } else if (kartalosowana == 11) {
-            mySprite.setImage(assets.image`5blue`)
-        } else if (kartalosowana == 12) {
-            mySprite.setImage(assets.image`6blue`)
-        } else if (kartalosowana == 13) {
-            mySprite.setImage(assets.image`7blue`)
-        } else if (kartalosowana == 14) {
-            mySprite.setImage(assets.image`1yellow`)
-        } else if (kartalosowana == 15) {
-            mySprite.setImage(assets.image`2yellow`)
-        } else if (kartalosowana == 16) {
-            mySprite.setImage(assets.image`3yellow`)
-        } else if (kartalosowana == 17) {
-            mySprite.setImage(assets.image`4yellow`)
-        } else if (kartalosowana == 18) {
-            mySprite.setImage(assets.image`5yellow`)
-        } else if (kartalosowana == 19) {
-            mySprite.setImage(assets.image`6yellow`)
-        } else if (kartalosowana == 20) {
-            mySprite.setImage(assets.image`7yellow`)
-        } else if (kartalosowana == 21) {
-            mySprite.setImage(assets.image`1red`)
-        } else if (kartalosowana == 22) {
-            mySprite.setImage(assets.image`2red`)
-        } else if (kartalosowana == 23) {
-            mySprite.setImage(assets.image`3red`)
-        } else if (kartalosowana == 24) {
-            mySprite.setImage(assets.image`4red`)
-        } else if (kartalosowana == 25) {
-            mySprite.setImage(assets.image`5red`)
-        } else if (kartalosowana == 26) {
-            mySprite.setImage(assets.image`6red`)
-        } else if (kartalosowana == 27) {
-            mySprite.setImage(assets.image`7red`)
-        } else if (kartalosowana == 28) {
-            mySprite.setImage(assets.image`1green`)
-        } else if (kartalosowana == 29) {
-            mySprite.setImage(assets.image`2green`)
-        } else if (kartalosowana == 30) {
-            mySprite.setImage(assets.image`3green`)
-        } else if (kartalosowana == 31) {
-            mySprite.setImage(assets.image`4green`)
-        } else if (kartalosowana == 32) {
-            mySprite.setImage(assets.image`5green`)
-        } else if (kartalosowana == 33) {
-            mySprite.setImage(assets.image`6green`)
-        } else if (kartalosowana == 34) {
-            mySprite.setImage(assets.image`7green`)
-        } else if (kartalosowana == 35) {
-            mySprite.setImage(assets.image`8green`)
-        } else if (kartalosowana == 36) {
-            mySprite.setImage(assets.image`8blue`)
-        } else if (kartalosowana == 37) {
-            mySprite.setImage(assets.image`8yellow`)
-        } else if (kartalosowana == 38) {
-            mySprite.setImage(assets.image`8red`)
-        } else if (kartalosowana == 39) {
-            mySprite.setImage(assets.image`9green`)
-        } else if (kartalosowana == 40) {
-            mySprite.setImage(assets.image`9blue`)
-        } else if (kartalosowana == 41) {
-            mySprite.setImage(assets.image`9yellow`)
-        } else if (kartalosowana == 42) {
-            mySprite.setImage(assets.image`9red`)
-        } else if (kartalosowana == 43) {
-            mySprite.setImage(assets.image`0green`)
-        } else if (kartalosowana == 44) {
-            mySprite.setImage(assets.image`0blue`)
-        } else if (kartalosowana == 45) {
-            mySprite.setImage(assets.image`0yellow`)
-        } else if (kartalosowana == 46) {
-            mySprite.setImage(assets.image`0red`)
-        } else if (kartalosowana == 47) {
-            mySprite.setImage(assets.image`blokada_red`)
-        } else if (kartalosowana == 48) {
-            mySprite.setImage(assets.image`blokada_green`)
-        } else if (kartalosowana == 49) {
-            mySprite.setImage(assets.image`blokada_yellow`)
-        } else if (kartalosowana == 50) {
-            mySprite.setImage(assets.image`plus2yellow`)
-        } else if (kartalosowana == 51) {
-            mySprite.setImage(assets.image`plus2red`)
-        } else if (kartalosowana == 52) {
-            mySprite.setImage(assets.image`plus2blue`)
-        } else if (kartalosowana == 53) {
-            mySprite.setImage(assets.image`plus2green`)
-        } else if (kartalosowana == 54) {
-            mySprite.setImage(assets.image`plus4`)
-        } else {
-            mySprite.setImage(assets.image`myImage`)
-        }
+        mySprite.setImage(doDajObrazek(kartalosowana))
         mySprite.setPosition(8 + index2 * 18, 16)
     }
 }
@@ -155,9 +43,127 @@ function doMoveRight () {
         }
     }
 }
+function doDajObrazek (numerKarty: number) {
+    if (kartalosowana == 0) {
+        obrazeKarty = assets.image`plus4`
+    } else if (numerKarty == 1) {
+        obrazeKarty = assets.image`zmiana_koloru`
+    } else if (numerKarty == 2) {
+        obrazeKarty = assets.image`Zmiana_kierunku_green`
+    } else if (numerKarty == 3) {
+        obrazeKarty = assets.image`Zmiana_kierunku_red`
+    } else if (numerKarty == 4) {
+        obrazeKarty = assets.image`Zmiana_kierunku_yellow`
+    } else if (numerKarty == 5) {
+        obrazeKarty = assets.image`Zmiana_kierunku_blue`
+    } else if (numerKarty == 6) {
+        obrazeKarty = assets.image`blokada_blue`
+    } else if (numerKarty == 7) {
+        obrazeKarty = assets.image`1blue`
+    } else if (numerKarty == 8) {
+        obrazeKarty = assets.image`2blue`
+    } else if (numerKarty == 9) {
+        obrazeKarty = assets.image`3blue`
+    } else if (numerKarty == 10) {
+        obrazeKarty = assets.image`4blue`
+    } else if (numerKarty == 11) {
+        obrazeKarty = assets.image`5blue`
+    } else if (numerKarty == 12) {
+        obrazeKarty = assets.image`6blue`
+    } else if (numerKarty == 13) {
+        obrazeKarty = assets.image`7blue`
+    } else if (numerKarty == 14) {
+        obrazeKarty = assets.image`1yellow`
+    } else if (numerKarty == 15) {
+        obrazeKarty = assets.image`2yellow`
+    } else if (numerKarty == 16) {
+        obrazeKarty = assets.image`3yellow`
+    } else if (numerKarty == 17) {
+        obrazeKarty = assets.image`4yellow`
+    } else if (numerKarty == 18) {
+        obrazeKarty = assets.image`5yellow`
+    } else if (numerKarty == 19) {
+        obrazeKarty = assets.image`6yellow`
+    } else if (numerKarty == 20) {
+        obrazeKarty = assets.image`7yellow`
+    } else if (numerKarty == 21) {
+        obrazeKarty = assets.image`1red`
+    } else if (numerKarty == 22) {
+        obrazeKarty = assets.image`2red`
+    } else if (numerKarty == 23) {
+        obrazeKarty = assets.image`3red`
+    } else if (numerKarty == 24) {
+        obrazeKarty = assets.image`4red`
+    } else if (numerKarty == 25) {
+        obrazeKarty = assets.image`5red`
+    } else if (numerKarty == 26) {
+        obrazeKarty = assets.image`6red`
+    } else if (numerKarty == 27) {
+        obrazeKarty = assets.image`7red`
+    } else if (numerKarty == 28) {
+        obrazeKarty = assets.image`1green`
+    } else if (numerKarty == 29) {
+        obrazeKarty = assets.image`2green`
+    } else if (numerKarty == 30) {
+        obrazeKarty = assets.image`3green`
+    } else if (numerKarty == 31) {
+        obrazeKarty = assets.image`4green`
+    } else if (numerKarty == 32) {
+        obrazeKarty = assets.image`5green`
+    } else if (numerKarty == 33) {
+        obrazeKarty = assets.image`6green`
+    } else if (numerKarty == 34) {
+        obrazeKarty = assets.image`7green`
+    } else if (numerKarty == 35) {
+        obrazeKarty = assets.image`8green`
+    } else if (numerKarty == 36) {
+        obrazeKarty = assets.image`8blue`
+    } else if (numerKarty == 37) {
+        obrazeKarty = assets.image`8yellow`
+    } else if (numerKarty == 38) {
+        obrazeKarty = assets.image`8red`
+    } else if (numerKarty == 39) {
+        obrazeKarty = assets.image`9green`
+    } else if (numerKarty == 40) {
+        obrazeKarty = assets.image`9blue`
+    } else if (numerKarty == 41) {
+        obrazeKarty = assets.image`9yellow`
+    } else if (numerKarty == 42) {
+        obrazeKarty = assets.image`9red`
+    } else if (numerKarty == 43) {
+        obrazeKarty = assets.image`0green`
+    } else if (numerKarty == 44) {
+        obrazeKarty = assets.image`0blue`
+    } else if (numerKarty == 45) {
+        obrazeKarty = assets.image`0yellow`
+    } else if (numerKarty == 46) {
+        obrazeKarty = assets.image`0red`
+    } else if (numerKarty == 47) {
+        obrazeKarty = assets.image`blokada_red`
+    } else if (numerKarty == 48) {
+        obrazeKarty = assets.image`blokada_green`
+    } else if (numerKarty == 49) {
+        obrazeKarty = assets.image`blokada_yellow`
+    } else if (numerKarty == 50) {
+        obrazeKarty = assets.image`plus2yellow`
+    } else if (numerKarty == 51) {
+        obrazeKarty = assets.image`plus2red`
+    } else if (numerKarty == 52) {
+        obrazeKarty = assets.image`plus2blue`
+    } else if (numerKarty == 53) {
+        obrazeKarty = assets.image`plus2green`
+    } else if (numerKarty == 54) {
+        obrazeKarty = assets.image`plus4`
+    } else {
+        obrazeKarty = assets.image`myImage`
+    }
+    return obrazeKarty
+}
 let value3: Sprite = null
 let mySprite: Sprite = null
 let kartalosowana = 0
+let obrazeKarty
+obrazeKarty = null
 doShuffle()
 let wybierak = sprites.create(assets.image`selector_off`, SpriteKind.Enemy)
 wybierak.z = 1
