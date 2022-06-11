@@ -30,7 +30,7 @@ function doShuffle () {
     }
 }
 function doInicjujTalie () {
-    for (let index = 0; index <= talia.length - 1; index++) {
+    for (let index3 = 0; index3 <= talia.length - 1; index3++) {
         talia.pop()
     }
     for (let index = 0; index < 4; index++) {
@@ -196,10 +196,35 @@ function doInicjujTalie () {
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     doMoveRight()
 })
+function doRozdajKarty (ileGraczy: number) {
+    for (let index57 = 0; index57 <= reka1.length - 1; index57++) {
+        reka1.pop()
+    }
+    for (let index58 = 0; index58 <= reka2.length - 1; index58++) {
+        reka2.pop()
+    }
+    for (let index59 = 0; index59 <= reka3.length - 1; index59++) {
+        reka3.pop()
+    }
+    for (let index60 = 0; index60 <= reka4.length - 1; index60++) {
+        reka4.pop()
+    }
+    doInicjujTalie()
+    for (let index61 = 0; index61 <= 6; index61++) {
+        reka1.unshift(talia.removeAt(randint(0, talia.length - 1)))
+        reka2.unshift(talia.removeAt(randint(0, talia.length - 1)))
+        if (ileGraczy > 2) {
+            reka3.unshift(talia.removeAt(randint(0, talia.length - 1)))
+        }
+        if (ileGraczy > 3) {
+            reka4.unshift(talia.removeAt(randint(0, talia.length - 1)))
+        }
+    }
+}
 function doMoveRight () {
-    for (let index3 = 0; index3 <= sprites.allOfKind(SpriteKind.Player).length - 1; index3++) {
-        value3 = sprites.allOfKind(SpriteKind.Player)[sprites.allOfKind(SpriteKind.Player).length - 1 - index3]
-        for (let index4 = 0; index4 <= 5; index4++) {
+    for (let index310 = 0; index310 <= sprites.allOfKind(SpriteKind.Player).length - 1; index310++) {
+        value3 = sprites.allOfKind(SpriteKind.Player)[sprites.allOfKind(SpriteKind.Player).length - 1 - index310]
+        for (let index410 = 0; index410 <= 5; index410++) {
             value3.x += 3 * 1
             if (value3.x >= 0 && value3.x <= scene.screenWidth()) {
                 pause(10)
@@ -326,6 +351,10 @@ function doDajObrazek (numerKarty: number) {
 let value3: Sprite = null
 let mySprite: Sprite = null
 let kartalosowana = 0
+let reka4: number[] = []
+let reka3: number[] = []
+let reka2: number[] = []
+let reka1: number[] = []
 let talia: number[] = []
 let obrazeKarty
 obrazeKarty = null
@@ -350,3 +379,8 @@ let textSprite2 = textsprite.create("dobierz:")
 textSprite2.setPosition(135, 96)
 let textSprite3 = textsprite.create("6")
 textSprite3.setPosition(145, 106)
+reka1 = []
+reka2 = []
+reka3 = []
+reka4 = []
+doRozdajKarty(4)
