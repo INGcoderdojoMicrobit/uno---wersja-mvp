@@ -1,5 +1,10 @@
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    doShuffle()
+    ktoryGracz += 1
+    if (ktoryGracz > 5) {
+        ktoryGracz = 1
+    }
+    doWyswietlReke(ktoryGracz)
+    doWyswietlGracza(ktoryGracz)
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     for (let value of sprites.allOfKind(SpriteKind.Player)) {
@@ -10,6 +15,26 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+function doWyswietlReke (numerGracza: number) {
+    if (numerGracza == 1) {
+        wyswreka = reka1
+    } else if (numerGracza == 2) {
+        wyswreka = reka2
+    } else if (numerGracza == 3) {
+        wyswreka = reka3
+    } else if (numerGracza == 4) {
+        wyswreka = reka4
+    } else {
+        wyswreka = talia
+    }
+    sprites.destroyAllSpritesOfKind(SpriteKind.Player)
+    for (let index2 = 0; index2 <= wyswreka.length - 1; index2++) {
+        kartalosowana = wyswreka[index2]
+        mySprite = sprites.create(assets.image`1blue`, SpriteKind.Player)
+        mySprite.setImage(doDajObrazek(kartalosowana))
+        mySprite.setPosition(8 + index2 * 18, 16)
+    }
+}
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     for (let value2 of sprites.allOfKind(SpriteKind.Player)) {
         for (let index = 0; index <= 5; index++) {
@@ -20,15 +45,6 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
-function doShuffle () {
-    sprites.destroyAllSpritesOfKind(SpriteKind.Player)
-    for (let index2 = 0; index2 <= 19; index2++) {
-        kartalosowana = randint(0, 54)
-        mySprite = sprites.create(assets.image`1blue`, SpriteKind.Player)
-        mySprite.setImage(doDajObrazek(kartalosowana))
-        mySprite.setPosition(8 + index2 * 18, 16)
-    }
-}
 function doInicjujTalie () {
     for (let index3 = 0; index3 <= talia.length - 1; index3++) {
         talia.pop()
@@ -196,6 +212,41 @@ function doInicjujTalie () {
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     doMoveRight()
 })
+function doWyswietlGracza (numerGracza: number) {
+    if (numerGracza == 1) {
+        gracz1.setImage(assets.image`cat1`)
+        textGracz1.setText("Player1")
+    } else if (numerGracza == 2) {
+        gracz1.setImage(assets.image`forestMonkey0`)
+        textGracz1.setText("Player2")
+    } else if (numerGracza == 3) {
+        gracz1.setImage(assets.image`forestSnake0`)
+        textGracz1.setText("Player3")
+    } else if (numerGracza == 4) {
+        gracz1.setImage(assets.image`duck5`)
+        textGracz1.setText("Player4")
+    } else {
+        gracz1.setImage(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `)
+        textGracz1.setText("")
+    }
+}
 function doRozdajKarty (ileGraczy: number) {
     for (let index57 = 0; index57 <= reka1.length - 1; index57++) {
         reka1.pop()
@@ -210,7 +261,7 @@ function doRozdajKarty (ileGraczy: number) {
         reka4.pop()
     }
     doInicjujTalie()
-    for (let index61 = 0; index61 <= 6; index61++) {
+    for (let index61 = 0; index61 <= 15; index61++) {
         reka1.unshift(talia.removeAt(randint(0, talia.length - 1)))
         reka2.unshift(talia.removeAt(randint(0, talia.length - 1)))
         if (ileGraczy > 2) {
@@ -348,6 +399,7 @@ function doDajObrazek (numerKarty: number) {
     }
     return obrazeKarty
 }
+let obrazeKarty: Image = null
 let value3: Sprite = null
 let mySprite: Sprite = null
 let kartalosowana = 0
@@ -355,10 +407,11 @@ let reka4: number[] = []
 let reka3: number[] = []
 let reka2: number[] = []
 let reka1: number[] = []
+let wyswreka: number[] = []
+let ktoryGracz = 0
+let textGracz1: TextSprite = null
+let gracz1: Sprite = null
 let talia: number[] = []
-let obrazeKarty
-obrazeKarty = null
-doShuffle()
 talia = []
 let wybierak = sprites.create(assets.image`selector_off`, SpriteKind.Enemy)
 wybierak.z = 1
@@ -369,18 +422,16 @@ assets.animation`selector`,
 50,
 true
 )
-let gracz1 = sprites.create(assets.image`duck5`, SpriteKind.Enemy)
+gracz1 = sprites.create(assets.image`cat1`, SpriteKind.Enemy)
 gracz1.setPosition(9, 110)
-let textSprite = textsprite.create("Player1")
-textSprite.setPosition(20, 90)
+textGracz1 = textsprite.create("Player1")
+textGracz1.setPosition(20, 90)
 let kupka1 = sprites.create(assets.image`4green`, SpriteKind.Enemy)
 kupka1.setPosition(77, 78)
 let textSprite2 = textsprite.create("dobierz:")
 textSprite2.setPosition(135, 96)
 let textSprite3 = textsprite.create("6")
 textSprite3.setPosition(145, 106)
-reka1 = []
-reka2 = []
-reka3 = []
-reka4 = []
+ktoryGracz = 1
 doRozdajKarty(4)
+doWyswietlReke(1)
