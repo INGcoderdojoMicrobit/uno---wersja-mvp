@@ -29,6 +29,170 @@ function doShuffle () {
         mySprite.setPosition(8 + index2 * 18, 16)
     }
 }
+function doInicjujTalie () {
+    for (let index = 0; index <= talia.length - 1; index++) {
+        talia.pop()
+    }
+    for (let index = 0; index < 4; index++) {
+        talia.unshift(0)
+    }
+    for (let index = 0; index < 4; index++) {
+        talia.unshift(1)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(2)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(3)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(4)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(5)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(6)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(48)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(49)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(50)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(47)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(51)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(52)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(53)
+    }
+    for (let index = 0; index < 1; index++) {
+        talia.unshift(43)
+    }
+    for (let index = 0; index < 1; index++) {
+        talia.unshift(44)
+    }
+    for (let index = 0; index < 1; index++) {
+        talia.unshift(45)
+    }
+    for (let index = 0; index < 1; index++) {
+        talia.unshift(46)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(7)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(8)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(9)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(10)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(11)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(12)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(13)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(14)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(15)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(16)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(17)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(18)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(19)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(20)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(21)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(22)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(23)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(24)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(25)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(26)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(27)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(28)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(29)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(30)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(31)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(32)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(33)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(34)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(35)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(36)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(37)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(38)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(39)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(40)
+    }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(41)
+    }
+}
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     doMoveRight()
 })
@@ -162,9 +326,11 @@ function doDajObrazek (numerKarty: number) {
 let value3: Sprite = null
 let mySprite: Sprite = null
 let kartalosowana = 0
+let talia: number[] = []
 let obrazeKarty
 obrazeKarty = null
 doShuffle()
+talia = []
 let wybierak = sprites.create(assets.image`selector_off`, SpriteKind.Enemy)
 wybierak.z = 1
 wybierak.setPosition(8 + 4 * 18, 16)
