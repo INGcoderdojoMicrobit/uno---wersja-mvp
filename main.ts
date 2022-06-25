@@ -1,3 +1,11 @@
+controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
+    for (let value of sprites.allOfKind(SpriteKind.Player)) {
+        if (wybierak.x == value.x) {
+            value.y = 16
+            WybraneKarty[iterator] = 0
+        }
+    }
+})
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     ktoryGracz += 1
     if (ktoryGracz > 5) {
@@ -8,15 +16,10 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     pause(100)
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    for (let value of sprites.allOfKind(SpriteKind.Player)) {
-        if (Math.percentChance(30)) {
-            value.y = 32
-        } else {
-            value.y = 16
-        }
-    }
+    game.splash(WybraneKarty)
 })
 function doWyswietlReke (numerGracza: number) {
+    iterator = 0
     if (numerGracza == 1) {
         wyswreka = reka1
     } else if (numerGracza == 2) {
@@ -29,11 +32,15 @@ function doWyswietlReke (numerGracza: number) {
         wyswreka = talia
     }
     sprites.destroyAllSpritesOfKind(SpriteKind.Player)
+    for (let index2 = 0; index2 <= WybraneKarty.length - 1; index2++) {
+        WybraneKarty.pop()
+    }
     for (let index2 = 0; index2 <= wyswreka.length - 1; index2++) {
         kartalosowana = wyswreka[index2]
         mySprite = sprites.create(assets.image`1blue`, SpriteKind.Player)
         mySprite.setImage(doDajObrazek(kartalosowana))
         mySprite.setPosition(8 + index2 * 18, 16)
+        WybraneKarty.push(0)
     }
 }
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -50,10 +57,12 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     }
     if (gdziewybierak > 0) {
         gdziewybierak += -1
+        iterator += -1
         wybierak.setPosition(8 + gdziewybierak * 18, 16)
     }
     for (let value2 of sprites.allOfKind(SpriteKind.Player)) {
         if (value2.x < 0 && gdziewybierak == 0) {
+            iterator += -1
             doMoveRight()
         }
     }
@@ -243,11 +252,13 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (gdziewybierak < 8) {
         if (gdziewybierak < wyswreka.length - 1) {
             gdziewybierak += 1
+            iterator += 1
             wybierak.setPosition(8 + gdziewybierak * 18, 16)
         }
     }
     for (let value2 of sprites.allOfKind(SpriteKind.Player)) {
         if (value2.x > scene.screenWidth() && gdziewybierak == 8) {
+            iterator += 1
             for (let value3 of sprites.allOfKind(SpriteKind.Player)) {
                 for (let index = 0; index <= 5; index++) {
                     value3.x += 3 * -1
@@ -294,6 +305,14 @@ function doWyswietlGracza (numerGracza: number) {
         textGracz1.setText("")
     }
 }
+controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
+    for (let value of sprites.allOfKind(SpriteKind.Player)) {
+        if (wybierak.x == value.x) {
+            value.y = 32
+            WybraneKarty[iterator] = 1
+        }
+    }
+})
 function doRozdajKarty (ileGraczy: number) {
     for (let index57 = 0; index57 <= reka1.length - 1; index57++) {
         reka1.pop()
@@ -308,7 +327,7 @@ function doRozdajKarty (ileGraczy: number) {
         reka4.pop()
     }
     doInicjujTalie()
-    for (let index61 = 0; index61 <= 3; index61++) {
+    for (let index61 = 0; index61 <= 8; index61++) {
         reka1.unshift(talia.removeAt(randint(0, talia.length - 1)))
         reka2.unshift(talia.removeAt(randint(0, talia.length - 1)))
         if (ileGraczy > 2) {
@@ -460,8 +479,12 @@ let textGracz1: TextSprite = null
 let gracz1: Sprite = null
 let wybierak: Sprite = null
 let gdziewybierak = 0
+let iterator = 0
+let WybraneKarty: number[] = []
 let talia: number[] = []
 talia = []
+WybraneKarty = []
+iterator = 0
 gdziewybierak = 0
 wybierak = sprites.create(assets.image`selector_off`, SpriteKind.Enemy)
 wybierak.z = 1
