@@ -5,6 +5,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     }
     doWyswietlReke(ktoryGracz)
     doWyswietlGracza(ktoryGracz)
+    pause(100)
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     for (let value of sprites.allOfKind(SpriteKind.Player)) {
@@ -36,12 +37,24 @@ function doWyswietlReke (numerGracza: number) {
     }
 }
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (ktoryGracz == 1) {
+        wyswreka = reka1
+    } else if (ktoryGracz == 2) {
+        wyswreka = reka2
+    } else if (ktoryGracz == 3) {
+        wyswreka = reka3
+    } else if (ktoryGracz == 4) {
+        wyswreka = reka4
+    } else {
+        wyswreka = talia
+    }
+    if (gdziewybierak > 0) {
+        gdziewybierak += -1
+        wybierak.setPosition(8 + gdziewybierak * 18, 16)
+    }
     for (let value2 of sprites.allOfKind(SpriteKind.Player)) {
-        for (let index = 0; index <= 5; index++) {
-            value2.x += 3 * -1
-            if (value2.x >= 0 && value2.x <= scene.screenWidth()) {
-                pause(10)
-            }
+        if (value2.x < 0 && gdziewybierak == 0) {
+            doMoveRight()
         }
     }
 })
@@ -208,9 +221,43 @@ function doInicjujTalie () {
     for (let index = 0; index < 2; index++) {
         talia.unshift(41)
     }
+    for (let index = 0; index < 2; index++) {
+        talia.unshift(42)
+    }
+    for (let index = 0; index < 4; index++) {
+        talia.unshift(54)
+    }
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    doMoveRight()
+    if (ktoryGracz == 1) {
+        wyswreka = reka1
+    } else if (ktoryGracz == 2) {
+        wyswreka = reka2
+    } else if (ktoryGracz == 3) {
+        wyswreka = reka3
+    } else if (ktoryGracz == 4) {
+        wyswreka = reka4
+    } else {
+        wyswreka = talia
+    }
+    if (gdziewybierak < 8) {
+        if (gdziewybierak < wyswreka.length - 1) {
+            gdziewybierak += 1
+            wybierak.setPosition(8 + gdziewybierak * 18, 16)
+        }
+    }
+    for (let value2 of sprites.allOfKind(SpriteKind.Player)) {
+        if (value2.x > scene.screenWidth() && gdziewybierak == 8) {
+            for (let value3 of sprites.allOfKind(SpriteKind.Player)) {
+                for (let index = 0; index <= 5; index++) {
+                    value3.x += 3 * -1
+                    if (value3.x >= 0 && value3.x <= scene.screenWidth()) {
+                        pause(10)
+                    }
+                }
+            }
+        }
+    }
 })
 function doWyswietlGracza (numerGracza: number) {
     if (numerGracza == 1) {
@@ -261,7 +308,7 @@ function doRozdajKarty (ileGraczy: number) {
         reka4.pop()
     }
     doInicjujTalie()
-    for (let index61 = 0; index61 <= 15; index61++) {
+    for (let index61 = 0; index61 <= 3; index61++) {
         reka1.unshift(talia.removeAt(randint(0, talia.length - 1)))
         reka2.unshift(talia.removeAt(randint(0, talia.length - 1)))
         if (ileGraczy > 2) {
@@ -411,11 +458,14 @@ let wyswreka: number[] = []
 let ktoryGracz = 0
 let textGracz1: TextSprite = null
 let gracz1: Sprite = null
+let wybierak: Sprite = null
+let gdziewybierak = 0
 let talia: number[] = []
 talia = []
-let wybierak = sprites.create(assets.image`selector_off`, SpriteKind.Enemy)
+gdziewybierak = 0
+wybierak = sprites.create(assets.image`selector_off`, SpriteKind.Enemy)
 wybierak.z = 1
-wybierak.setPosition(8 + 4 * 18, 16)
+wybierak.setPosition(8 + gdziewybierak * 18, 16)
 animation.runImageAnimation(
 wybierak,
 assets.animation`selector`,
@@ -434,4 +484,5 @@ let textSprite3 = textsprite.create("6")
 textSprite3.setPosition(145, 106)
 ktoryGracz = 1
 doRozdajKarty(4)
-doWyswietlReke(1)
+doWyswietlReke(ktoryGracz)
+doWyswietlGracza(ktoryGracz)
