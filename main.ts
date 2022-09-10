@@ -76,6 +76,34 @@ function doJakiKolorKarty (karta: number) {
     } else if (karta == 52) {
         return 2
     }
+    if (karta == 2) {
+        return 3
+    } else if (karta >= 28 && karta <= 35) {
+        return 3
+    } else if (karta == 39) {
+        return 3
+    } else if (karta == 43) {
+        return 3
+    } else if (karta == 48) {
+        return 3
+    } else if (karta == 53) {
+        return 3
+    }
+    if (karta == 3) {
+        return 4
+    } else if (karta >= 21 && karta <= 27) {
+        return 4
+    } else if (karta == 38) {
+        return 4
+    } else if (karta == 42) {
+        return 4
+    } else if (karta == 46) {
+        return 4
+    } else if (karta == 47) {
+        return 4
+    } else if (karta == 51) {
+        return 4
+    }
     return 0
 }
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
