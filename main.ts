@@ -2,13 +2,14 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     for (let value of sprites.allOfKind(SpriteKind.Player)) {
         if (wybierak.x == value.x) {
             value.y = 16
+            wybierak.y = 16
             WybraneKarty[iterator] = 0
         }
     }
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     ktoryGracz += 1
-    if (ktoryGracz > 5) {
+    if (ktoryGracz > 6) {
         ktoryGracz = 1
     }
     doWyswietlReke(ktoryGracz)
@@ -35,11 +36,11 @@ function doWyswietlReke (numerGracza: number) {
     for (let index2 = 0; index2 <= WybraneKarty.length - 1; index2++) {
         WybraneKarty.pop()
     }
-    for (let index2 = 0; index2 <= wyswreka.length - 1; index2++) {
-        kartalosowana = wyswreka[index2]
+    for (let index22 = 0; index22 <= wyswreka.length - 1; index22++) {
+        kartalosowana = wyswreka[index22]
         mySprite = sprites.create(assets.image`1blue`, SpriteKind.Player)
         mySprite.setImage(doDajObrazek(kartalosowana))
-        mySprite.setPosition(8 + index2 * 18, 16)
+        mySprite.setPosition(8 + index22 * 18, 16)
         WybraneKarty.push(0)
     }
 }
@@ -58,13 +59,17 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     if (gdziewybierak > 0) {
         gdziewybierak += -1
         iterator += -1
-        wybierak.setPosition(8 + gdziewybierak * 18, 16)
     }
     for (let value2 of sprites.allOfKind(SpriteKind.Player)) {
         if (value2.x < 0 && gdziewybierak == 0) {
             iterator += -1
             doMoveRight()
         }
+    }
+    if (WybraneKarty[iterator] == 0) {
+        wybierak.setPosition(8 + gdziewybierak * 18, 16)
+    } else {
+        wybierak.setPosition(8 + gdziewybierak * 18, 32)
     }
 })
 function doInicjujTalie () {
@@ -256,11 +261,11 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
             wybierak.setPosition(8 + gdziewybierak * 18, 16)
         }
     }
-    for (let value2 of sprites.allOfKind(SpriteKind.Player)) {
-        if (value2.x > scene.screenWidth() && gdziewybierak == 8) {
+    for (let value22 of sprites.allOfKind(SpriteKind.Player)) {
+        if (value22.x > scene.screenWidth() && gdziewybierak == 8) {
             iterator += 1
             for (let value3 of sprites.allOfKind(SpriteKind.Player)) {
-                for (let index = 0; index <= 5; index++) {
+                for (let index59 = 0; index59 <= 5; index59++) {
                     value3.x += 3 * -1
                     if (value3.x >= 0 && value3.x <= scene.screenWidth()) {
                         pause(10)
@@ -268,6 +273,11 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
                 }
             }
         }
+    }
+    if (WybraneKarty[iterator] == 0) {
+        wybierak.setPosition(8 + gdziewybierak * 18, 16)
+    } else {
+        wybierak.setPosition(8 + gdziewybierak * 18, 32)
     }
 })
 function doWyswietlGracza (numerGracza: number) {
@@ -306,21 +316,22 @@ function doWyswietlGracza (numerGracza: number) {
     }
 }
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
-    for (let value of sprites.allOfKind(SpriteKind.Player)) {
-        if (wybierak.x == value.x) {
-            value.y = 32
+    for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
+        if (wybierak.x == value4.x) {
+            value4.y = 32
+            wybierak.y = 32
             WybraneKarty[iterator] = 1
         }
     }
 })
 function doRozdajKarty (ileGraczy: number) {
-    for (let index57 = 0; index57 <= reka1.length - 1; index57++) {
+    for (let index572 = 0; index572 <= reka1.length - 1; index572++) {
         reka1.pop()
     }
-    for (let index58 = 0; index58 <= reka2.length - 1; index58++) {
+    for (let index582 = 0; index582 <= reka2.length - 1; index582++) {
         reka2.pop()
     }
-    for (let index59 = 0; index59 <= reka3.length - 1; index59++) {
+    for (let index592 = 0; index592 <= reka3.length - 1; index592++) {
         reka3.pop()
     }
     for (let index60 = 0; index60 <= reka4.length - 1; index60++) {
@@ -340,10 +351,10 @@ function doRozdajKarty (ileGraczy: number) {
 }
 function doMoveRight () {
     for (let index310 = 0; index310 <= sprites.allOfKind(SpriteKind.Player).length - 1; index310++) {
-        value3 = sprites.allOfKind(SpriteKind.Player)[sprites.allOfKind(SpriteKind.Player).length - 1 - index310]
+        value32 = sprites.allOfKind(SpriteKind.Player)[sprites.allOfKind(SpriteKind.Player).length - 1 - index310]
         for (let index410 = 0; index410 <= 5; index410++) {
-            value3.x += 3 * 1
-            if (value3.x >= 0 && value3.x <= scene.screenWidth()) {
+            value32.x += 3 * 1
+            if (value32.x >= 0 && value32.x <= scene.screenWidth()) {
                 pause(10)
             }
         }
@@ -466,7 +477,7 @@ function doDajObrazek (numerKarty: number) {
     return obrazeKarty
 }
 let obrazeKarty: Image = null
-let value3: Sprite = null
+let value32: Sprite = null
 let mySprite: Sprite = null
 let kartalosowana = 0
 let reka4: number[] = []
