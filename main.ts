@@ -304,6 +304,17 @@ function doInicjujTalie () {
         talia.unshift(54)
     }
 }
+function doCzyRuchMozliwy () {
+    for (let index2 = 0; index2 <= WybraneKarty.length - 1; index2++) {
+        if (WybraneKarty[index2] == 1) {
+            if (doJakiKolorKarty(reka1[index2]) == doJakiKolorKarty(KartaNaKupce)) {
+                game.splash("Dobry kolor!")
+            } else {
+                game.splash("Zły kolor!")
+            }
+        }
+    }
+}
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (ktoryGracz == 1) {
         wyswreka = reka1
@@ -548,6 +559,7 @@ let reka2: number[] = []
 let reka1: number[] = []
 let wyswreka: number[] = []
 let ktoryGracz = 0
+let KartaNaKupce = 0
 let textGracz1: TextSprite = null
 let gracz1: Sprite = null
 let wybierak: Sprite = null
@@ -572,6 +584,7 @@ gracz1 = sprites.create(assets.image`cat1`, SpriteKind.Enemy)
 gracz1.setPosition(9, 110)
 textGracz1 = textsprite.create("Player1")
 textGracz1.setPosition(20, 90)
+KartaNaKupce = 31
 let kupka1 = sprites.create(assets.image`4green`, SpriteKind.Enemy)
 kupka1.setPosition(77, 78)
 let textSprite2 = textsprite.create("dobierz:")
