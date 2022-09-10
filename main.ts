@@ -44,6 +44,40 @@ function doWyswietlReke (numerGracza: number) {
         WybraneKarty.push(0)
     }
 }
+// 1 Żółty
+// 2 Niebieski
+// 3 Zielony 
+// 4 Czerwony
+// 
+function doJakiKolorKarty (karta: number) {
+    if (karta == 4) {
+        return 1
+    } else if (karta >= 14 && karta <= 20) {
+        return 1
+    } else if (karta == 37) {
+        return 1
+    } else if (karta == 41) {
+        return 1
+    } else if (karta == 45) {
+        return 1
+    } else if (karta == 49) {
+        return 1
+    } else if (karta == 50) {
+        return 1
+    }
+    if (karta >= 5 && karta <= 13) {
+        return 2
+    } else if (karta == 36) {
+        return 2
+    } else if (karta == 40) {
+        return 2
+    } else if (karta == 44) {
+        return 2
+    } else if (karta == 52) {
+        return 2
+    }
+    return 0
+}
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     if (ktoryGracz == 1) {
         wyswreka = reka1
