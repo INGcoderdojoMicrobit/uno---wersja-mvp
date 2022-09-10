@@ -17,7 +17,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     pause(100)
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    game.splash(WybraneKarty)
+    doCzyRuchMozliwy()
 })
 function doWyswietlReke (numerGracza: number) {
     iterator = 0
