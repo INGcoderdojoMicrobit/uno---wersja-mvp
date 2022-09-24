@@ -47,9 +47,8 @@ function doWyswietlReke (numerGracza: number) {
 }
 // 1 Żółty
 // 2 Niebieski
-// 3 Zielony 
+// 3 Zielony
 // 4 Czerwony
-// 
 function doJakiKolorKarty (karta: number) {
     if (karta == 4) {
         return 1
@@ -307,21 +306,21 @@ function doInicjujTalie () {
 }
 function doCzyRuchMozliwy () {
     czyZlaKarta = 0
-    for (let index2 = 0; index2 <= WybraneKarty.length - 1; index2++) {
-        if (WybraneKarty[index2] == 1) {
-            if (doJakiKolorKarty(reka1[index2]) == doJakiKolorKarty(KartaNaKupce)) {
-                KartaNaKupce = reka1.removeAt(index2)
+    for (let index210 = 0; index210 <= WybraneKarty.length - 1; index210++) {
+        if (WybraneKarty[index210] == 1) {
+            if (doJakiKolorKarty(reka1[index210]) == doJakiKolorKarty(KartaNaKupce)) {
+                KartaNaKupce = reka1.removeAt(index210)
             } else {
                 czyZlaKarta = 1
             }
         }
     }
     if (czyZlaKarta == 1) {
-        for (let index2 = 0; index2 <= WybraneKarty.length - 1; index2++) {
-            if (WybraneKarty[index2] == 1) {
-                if (doJakaWartoscKarty(reka1[index2]) == doJakaWartoscKarty(KartaNaKupce)) {
+        for (let index211 = 0; index211 <= WybraneKarty.length - 1; index211++) {
+            if (WybraneKarty[index211] == 1) {
+                if (doJakaWartoscKarty(reka1[index211]) == doJakaWartoscKarty(KartaNaKupce)) {
                     czyZlaKarta = 0
-                    KartaNaKupce = reka1.removeAt(index2)
+                    KartaNaKupce = reka1.removeAt(index211)
                 } else {
                     czyZlaKarta = 1
                 }
@@ -411,12 +410,11 @@ function doWyswietlGracza (numerGracza: number) {
         textGracz1.setText("")
     }
 }
-// 10 - POSTÓJ 
-// 11 - WEŹ 2 
+// 10 - POSTÓJ
+// 11 - WEŹ 2
 // 12 - ZMIANA KIERUNKU
-// 13 - WYBIERZ KOLOR 
-// 14 - WYBIERZ KOLOR + WEŹ 4 
-// 
+// 13 - WYBIERZ KOLOR
+// 14 - WYBIERZ KOLOR + WEŹ 4
 function doJakaWartoscKarty (karta: number) {
     if (karta == 7 || (karta == 14 || (karta == 21 || karta == 28))) {
         return 1
