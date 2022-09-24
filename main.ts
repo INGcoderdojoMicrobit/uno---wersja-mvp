@@ -310,14 +310,32 @@ function doCzyRuchMozliwy () {
     for (let index2 = 0; index2 <= WybraneKarty.length - 1; index2++) {
         if (WybraneKarty[index2] == 1) {
             if (doJakiKolorKarty(reka1[index2]) == doJakiKolorKarty(KartaNaKupce)) {
-            	
+                KartaNaKupce = reka1.removeAt(index2)
             } else {
                 czyZlaKarta = 1
             }
         }
     }
     if (czyZlaKarta == 1) {
-        game.splash("Nie można tak zagrać!")
+        for (let index2 = 0; index2 <= WybraneKarty.length - 1; index2++) {
+            if (WybraneKarty[index2] == 1) {
+                if (doJakaWartoscKarty(reka1[index2]) == doJakaWartoscKarty(KartaNaKupce)) {
+                    czyZlaKarta = 0
+                    KartaNaKupce = reka1.removeAt(index2)
+                } else {
+                    czyZlaKarta = 1
+                }
+            }
+        }
+    }
+    if (czyZlaKarta == 1) {
+        game.splash("Nie można tak zagrać")
+    } else {
+        doWyswietlReke(ktoryGracz)
+        doWyswietlGracza(ktoryGracz)
+        kupka1.setImage(doDajObrazek(KartaNaKupce))
+        wybierak.y = 16
+        IleWybranych = 0
     }
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -622,6 +640,7 @@ let reka2: number[] = []
 let reka1: number[] = []
 let wyswreka: number[] = []
 let ktoryGracz = 0
+let kupka1: Sprite = null
 let KartaNaKupce = 0
 let textGracz1: TextSprite = null
 let gracz1: Sprite = null
@@ -650,7 +669,7 @@ gracz1.setPosition(9, 110)
 textGracz1 = textsprite.create("Player1")
 textGracz1.setPosition(20, 90)
 KartaNaKupce = 31
-let kupka1 = sprites.create(assets.image`4green`, SpriteKind.Enemy)
+kupka1 = sprites.create(assets.image`4green`, SpriteKind.Enemy)
 kupka1.setPosition(77, 78)
 let textSprite2 = textsprite.create("dobierz:")
 textSprite2.setPosition(135, 96)
