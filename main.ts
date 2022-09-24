@@ -4,6 +4,7 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
             value.y = 16
             wybierak.y = 16
             WybraneKarty[iterator] = 0
+            IleWybranych += -1
         }
     }
 })
@@ -305,14 +306,18 @@ function doInicjujTalie () {
     }
 }
 function doCzyRuchMozliwy () {
+    czyZlaKarta = 0
     for (let index2 = 0; index2 <= WybraneKarty.length - 1; index2++) {
         if (WybraneKarty[index2] == 1) {
             if (doJakiKolorKarty(reka1[index2]) == doJakiKolorKarty(KartaNaKupce)) {
-                game.splash("Dobry kolor!")
+            	
             } else {
-                game.splash("Zły kolor!")
+                czyZlaKarta = 1
             }
         }
+    }
+    if (czyZlaKarta == 1) {
+        game.splash("Nie można tak zagrać!")
     }
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -388,12 +393,69 @@ function doWyswietlGracza (numerGracza: number) {
         textGracz1.setText("")
     }
 }
+// 10 - POSTÓJ 
+// 11 - WEŹ 2 
+// 12 - ZMIANA KIERUNKU
+// 13 - WYBIERZ KOLOR 
+// 14 - WYBIERZ KOLOR + WEŹ 4 
+// 
+function doJakaWartoscKarty (karta: number) {
+    if (karta == 7 || (karta == 14 || (karta == 21 || karta == 28))) {
+        return 1
+    }
+    if (karta == 8 || (karta == 15 || (karta == 22 || karta == 29))) {
+        return 2
+    }
+    if (karta == 9 || (karta == 16 || (karta == 23 || karta == 30))) {
+        return 3
+    }
+    if (karta == 10 || (karta == 17 || (karta == 24 || karta == 31))) {
+        return 4
+    }
+    if (karta == 11 || (karta == 18 || (karta == 25 || karta == 32))) {
+        return 5
+    }
+    if (karta == 12 || (karta == 19 || (karta == 26 || karta == 33))) {
+        return 6
+    }
+    if (karta == 13 || (karta == 20 || (karta == 27 || karta == 34))) {
+        return 7
+    }
+    if (karta == 35 || (karta == 36 || (karta == 37 || karta == 38))) {
+        return 8
+    }
+    if (karta == 39 || (karta == 40 || (karta == 41 || karta == 42))) {
+        return 9
+    }
+    if (karta == 43 || (karta == 44 || (karta == 45 || karta == 46))) {
+        return 0
+    }
+    if (karta == 47 || (karta == 48 || (karta == 49 || karta == 6))) {
+        return 10
+    }
+    if (karta == 50 || (karta == 51 || (karta == 52 || karta == 53))) {
+        return 11
+    }
+    if (karta == 2 || (karta == 3 || (karta == 4 || karta == 5))) {
+        return 12
+    }
+    if (karta == 1) {
+        return 13
+    }
+    if (karta == 0) {
+        return 14
+    }
+    return 2037
+}
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
-    for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
-        if (wybierak.x == value4.x) {
-            value4.y = 32
-            wybierak.y = 32
-            WybraneKarty[iterator] = 1
+    if (IleWybranych == 0) {
+        for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
+            if (wybierak.x == value4.x) {
+                value4.y = 32
+                wybierak.y = 32
+                WybraneKarty[iterator] = 1
+                IleWybranych += 1
+            }
         }
     }
 })
@@ -551,6 +613,7 @@ function doDajObrazek (numerKarty: number) {
 }
 let obrazeKarty: Image = null
 let value32: Sprite = null
+let czyZlaKarta = 0
 let mySprite: Sprite = null
 let kartalosowana = 0
 let reka4: number[] = []
@@ -563,6 +626,7 @@ let KartaNaKupce = 0
 let textGracz1: TextSprite = null
 let gracz1: Sprite = null
 let wybierak: Sprite = null
+let IleWybranych = 0
 let gdziewybierak = 0
 let iterator = 0
 let WybraneKarty: number[] = []
@@ -571,6 +635,7 @@ talia = []
 WybraneKarty = []
 iterator = 0
 gdziewybierak = 0
+IleWybranych = 0
 wybierak = sprites.create(assets.image`selector_off`, SpriteKind.Enemy)
 wybierak.z = 1
 wybierak.setPosition(8 + gdziewybierak * 18, 16)
