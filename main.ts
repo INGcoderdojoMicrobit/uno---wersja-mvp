@@ -8,17 +8,8 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    ktoryGracz += 1
-    if (ktoryGracz > 6) {
-        ktoryGracz = 1
-    }
-    doWyswietlReke(ktoryGracz)
-    doWyswietlGracza(ktoryGracz)
-    pause(100)
-})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    doCzyRuchMozliwy()
+	
 })
 function doWyswietlReke (numerGracza: number) {
     iterator = 0
@@ -349,6 +340,16 @@ function doCzyRuchMozliwy () {
         kupka1.setImage(doDajObrazek(KartaNaKupce))
         wybierak.y = 16
         IleWybranych = 0
+        sprites.destroyAllSpritesOfKind(SpriteKind.Player, effects.spray, 500)
+        pause(1000)
+        game.splash("Gra kolejna osoba")
+        pause(1000)
+        ktoryGracz += 1
+        if (ktoryGracz > 4) {
+            ktoryGracz = 1
+        }
+        doWyswietlReke(ktoryGracz)
+        doWyswietlGracza(ktoryGracz)
     }
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -487,6 +488,13 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
                 IleWybranych += 1
             }
         }
+    }
+})
+controller.B.onEvent(ControllerButtonEvent.Released, function () {
+    if (IleWybranych > 0) {
+        doCzyRuchMozliwy()
+    } else {
+        game.splash("Najpierw wybierz kartę")
     }
 })
 function doRozdajKarty (ileGraczy: number) {
