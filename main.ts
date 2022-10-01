@@ -22,6 +22,8 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 function doWyswietlReke (numerGracza: number) {
     iterator = 0
+    gdziewybierak = 0
+    wybierak.setPosition(8 + gdziewybierak * 18, 16)
     if (numerGracza == 1) {
         wyswreka = reka1
     } else if (numerGracza == 2) {
@@ -34,7 +36,8 @@ function doWyswietlReke (numerGracza: number) {
         wyswreka = talia
     }
     sprites.destroyAllSpritesOfKind(SpriteKind.Player)
-    for (let index2 = 0; index2 <= WybraneKarty.length - 1; index2++) {
+    koniecPetli = WybraneKarty.length - 1
+    for (let index2 = 0; index2 <= koniecPetli; index2++) {
         WybraneKarty.pop()
     }
     for (let index22 = 0; index22 <= wyswreka.length - 1; index22++) {
@@ -305,11 +308,22 @@ function doInicjujTalie () {
     }
 }
 function doCzyRuchMozliwy () {
+    if (ktoryGracz == 1) {
+        wyswreka = reka1
+    } else if (ktoryGracz == 2) {
+        wyswreka = reka2
+    } else if (ktoryGracz == 3) {
+        wyswreka = reka3
+    } else if (ktoryGracz == 4) {
+        wyswreka = reka4
+    } else {
+        wyswreka = talia
+    }
     czyZlaKarta = 0
     for (let index210 = 0; index210 <= WybraneKarty.length - 1; index210++) {
         if (WybraneKarty[index210] == 1) {
-            if (doJakiKolorKarty(reka1[index210]) == doJakiKolorKarty(KartaNaKupce)) {
-                KartaNaKupce = reka1.removeAt(index210)
+            if (doJakiKolorKarty(wyswreka[index210]) == doJakiKolorKarty(KartaNaKupce)) {
+                KartaNaKupce = wyswreka.removeAt(index210)
             } else {
                 czyZlaKarta = 1
             }
@@ -318,9 +332,9 @@ function doCzyRuchMozliwy () {
     if (czyZlaKarta == 1) {
         for (let index211 = 0; index211 <= WybraneKarty.length - 1; index211++) {
             if (WybraneKarty[index211] == 1) {
-                if (doJakaWartoscKarty(reka1[index211]) == doJakaWartoscKarty(KartaNaKupce)) {
+                if (doJakaWartoscKarty(wyswreka[index211]) == doJakaWartoscKarty(KartaNaKupce)) {
                     czyZlaKarta = 0
-                    KartaNaKupce = reka1.removeAt(index211)
+                    KartaNaKupce = wyswreka.removeAt(index211)
                 } else {
                     czyZlaKarta = 1
                 }
@@ -632,6 +646,7 @@ let value32: Sprite = null
 let czyZlaKarta = 0
 let mySprite: Sprite = null
 let kartalosowana = 0
+let koniecPetli = 0
 let reka4: number[] = []
 let reka3: number[] = []
 let reka2: number[] = []
