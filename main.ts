@@ -335,15 +335,23 @@ function doCzyRuchMozliwy () {
     if (czyZlaKarta == 1) {
         game.splash("Nie można tak zagrać")
     } else {
+        for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
+            if (wybierak.x == value4.x) {
+                value4.setVelocity(kupka1.x - wybierak.x, kupka1.y - wybierak.y)
+                break;
+            }
+        }
+        pause(1000)
         doWyswietlReke(ktoryGracz)
         doWyswietlGracza(ktoryGracz)
         kupka1.setImage(doDajObrazek(KartaNaKupce))
         wybierak.y = 16
         IleWybranych = 0
-        sprites.destroyAllSpritesOfKind(SpriteKind.Player, effects.spray, 500)
+        pause(1000)
+        sprites.destroyAllSpritesOfKind(SpriteKind.Player, effects.disintegrate, 500)
         pause(1000)
         game.splash("Gra kolejna osoba")
-        pause(1000)
+        pause(500)
         ktoryGracz += 1
         if (ktoryGracz > 4) {
             ktoryGracz = 1
