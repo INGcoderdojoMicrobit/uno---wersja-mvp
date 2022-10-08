@@ -541,10 +541,20 @@ controller.B.onEvent(ControllerButtonEvent.Released, function () {
         if (game.ask("    Czy dobrać kartę?")) {
             doDobierzKarte()
             doWyswietlReke(ktoryGracz)
-            WybraneKarty[iterator] = 1
             game.splash("Dodaliśmy kartę na początku!")
             czyZlaKarta = doCzyRuchMozliwy()
             if (czyZlaKarta == 0) {
+                if (IleWybranych == 0) {
+                    for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
+                        if (wybierak.x == value4.x) {
+                            value4.y = 32
+                            wybierak.y = 32
+                            WybraneKarty[iterator] = 1
+                            IleWybranych += 1
+                        }
+                    }
+                }
+                pause(500)
                 if (game.ask("    Czy zagrać kartą?")) {
                     doWykonajRuch()
                 }
