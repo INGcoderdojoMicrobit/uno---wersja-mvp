@@ -8,6 +8,31 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+function doWykonajRuch () {
+    for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
+        if (wybierak.x == value4.x) {
+            value4.setVelocity(kupka1.x - wybierak.x, kupka1.y - wybierak.y)
+            break;
+        }
+    }
+    pause(1000)
+    doWyswietlReke(ktoryGracz)
+    doWyswietlGracza(ktoryGracz)
+    kupka1.setImage(doDajObrazek(KartaNaKupce))
+    wybierak.y = 16
+    IleWybranych = 0
+    pause(1000)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Player, effects.disintegrate, 500)
+    pause(1000)
+    game.splash("Gra kolejna osoba")
+    pause(500)
+    ktoryGracz += 1
+    if (ktoryGracz > 4) {
+        ktoryGracz = 1
+    }
+    doWyswietlReke(ktoryGracz)
+    doWyswietlGracza(ktoryGracz)
+}
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 	
 })
@@ -332,33 +357,7 @@ function doCzyRuchMozliwy () {
             }
         }
     }
-    if (czyZlaKarta == 1) {
-        game.splash("Nie można tak zagrać")
-    } else {
-        for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
-            if (wybierak.x == value4.x) {
-                value4.setVelocity(kupka1.x - wybierak.x, kupka1.y - wybierak.y)
-                break;
-            }
-        }
-        pause(1000)
-        doWyswietlReke(ktoryGracz)
-        doWyswietlGracza(ktoryGracz)
-        kupka1.setImage(doDajObrazek(KartaNaKupce))
-        wybierak.y = 16
-        IleWybranych = 0
-        pause(1000)
-        sprites.destroyAllSpritesOfKind(SpriteKind.Player, effects.disintegrate, 500)
-        pause(1000)
-        game.splash("Gra kolejna osoba")
-        pause(500)
-        ktoryGracz += 1
-        if (ktoryGracz > 4) {
-            ktoryGracz = 1
-        }
-        doWyswietlReke(ktoryGracz)
-        doWyswietlGracza(ktoryGracz)
-    }
+    return czyZlaKarta
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (ktoryGracz == 1) {
@@ -500,9 +499,24 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 controller.B.onEvent(ControllerButtonEvent.Released, function () {
     if (IleWybranych > 0) {
-        doCzyRuchMozliwy()
+        czyZlaKarta = doCzyRuchMozliwy()
+        if (czyZlaKarta == 1) {
+            game.splash("Nie można tak zagrać")
+        } else {
+            doWykonajRuch()
+        }
     } else {
-        game.splash("Najpierw wybierz kartę")
+        if (game.ask("    Czy dobrać kartę?")) {
+            doDobierzKarte()
+            doWyswietlReke(ktoryGracz)
+            game.splash("Dodaliśmy kartę na początku!")
+            czyZlaKarta = doCzyRuchMozliwy()
+            if (czyZlaKarta == 0) {
+                if (game.ask("    Czy zagrać kartą?")) {
+                    doWykonajRuch()
+                }
+            }
+        }
     }
 })
 function doRozdajKarty (ileGraczy: number) {
@@ -657,6 +671,19 @@ function doDajObrazek (numerKarty: number) {
     }
     return obrazeKarty
 }
+function doDobierzKarte () {
+    if (ktoryGracz == 1) {
+        reka1.unshift(talia.removeAt(randint(0, talia.length - 1)))
+    } else if (ktoryGracz == 2) {
+        reka2.unshift(talia.removeAt(randint(0, talia.length - 1)))
+    } else if (ktoryGracz == 3) {
+        reka3.unshift(talia.removeAt(randint(0, talia.length - 1)))
+    } else if (ktoryGracz == 4) {
+        reka4.unshift(talia.removeAt(randint(0, talia.length - 1)))
+    }
+    KartaDobrana = 1
+}
+let KartaDobrana = 0
 let obrazeKarty: Image = null
 let value32: Sprite = null
 let czyZlaKarta = 0
