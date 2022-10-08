@@ -558,6 +558,8 @@ controller.B.onEvent(ControllerButtonEvent.Released, function () {
                 if (game.ask("    Czy zagrać kartą?")) {
                     doWykonajRuch()
                 }
+            } else {
+                game.splash("Coś nam to nie działa")
             }
         }
     }
