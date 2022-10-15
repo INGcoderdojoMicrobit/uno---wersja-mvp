@@ -57,8 +57,9 @@ function doWykonajRuch () {
     kupka1.setImage(doDajObrazek(KartaNaKupce))
     if (czyWybracKolor == 1) {
         doWybierzKolorKartyNaKupce()
+    } else {
+        doGraNastepny()
     }
-    doGraNastepny()
 }
 function doGraNastepny () {
     doWyswietlReke(ktoryGracz)
@@ -198,7 +199,7 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 function doWybierzKolorKartyNaKupce () {
-    game.splash("Wybierz kolor strzałkami lewo-prawo i potwierdź A")
+    doWyswietlReke(ktoryGracz)
 }
 function doInicjujTalie () {
     for (let index3 = 0; index3 <= talia.length - 1; index3++) {
@@ -366,9 +367,6 @@ function doInicjujTalie () {
     for (let index = 0; index < 2; index++) {
         talia.unshift(42)
     }
-    for (let index = 0; index < 4; index++) {
-        talia.unshift(54)
-    }
 }
 function doCzyRuchMozliwy () {
     if (ktoryGracz == 1) {
@@ -444,7 +442,20 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
             wybierak.setPosition(8 + gdziewybierak * 18, 32)
         }
     } else {
-    	
+        if (KartaNaKupce == 0) {
+            KartaNaKupce = 55
+        } else if (KartaNaKupce == 55) {
+            KartaNaKupce = 56
+        } else if (KartaNaKupce == 56) {
+            KartaNaKupce = 57
+        } else if (KartaNaKupce == 57) {
+            KartaNaKupce = 58
+        } else if (KartaNaKupce == 58) {
+            KartaNaKupce = 55
+        } else {
+        	
+        }
+        kupka1.setImage(doDajObrazek(KartaNaKupce))
     }
 })
 function doWyswietlGracza (numerGracza: number) {
@@ -620,7 +631,7 @@ function doMoveRight () {
     }
 }
 function doDajObrazek (numerKarty: number) {
-    if (kartalosowana == 0) {
+    if (numerKarty == 0) {
         obrazeKarty = assets.image`plus4`
     } else if (numerKarty == 1) {
         obrazeKarty = assets.image`zmiana_koloru`
@@ -728,10 +739,17 @@ function doDajObrazek (numerKarty: number) {
         obrazeKarty = assets.image`plus2blue`
     } else if (numerKarty == 53) {
         obrazeKarty = assets.image`plus2green`
-    } else if (numerKarty == 54) {
-        obrazeKarty = assets.image`plus4`
+    } else if (numerKarty == 55) {
+        obrazeKarty = assets.image`plus4zielona`
+    } else if (numerKarty == 56) {
+        obrazeKarty = assets.image`plus4zolta`
+    } else if (numerKarty == 57) {
+        obrazeKarty = assets.image`plus4czerwona`
+    } else if (numerKarty == 58) {
+        obrazeKarty = assets.image`plus4niebieska`
     } else {
         obrazeKarty = assets.image`myImage`
+        game.splash(numerKarty)
     }
     return obrazeKarty
 }
