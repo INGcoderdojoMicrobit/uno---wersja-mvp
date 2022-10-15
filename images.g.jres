@@ -334,6 +334,31 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "cat1"
     },
+    "image67": {
+        "data": "hwQQACAAAAAAEREREREREREREREREREAEBHxERERERERERERERERARER8RERERERERERERERERER8f//ERERERERERERERERERHxERERERFxd3d3ERERERER8RERERERcXd3dxERERERERERERFVVXV3d3cRERERERHxHxERVVV1d3d3iBERERERHx8REVVVVYWIiIgRERER8REfERFVIiKCiIiIERERER8RHxERESIigoiIiBERERH/////EREiIiISEREREREREREfERERIiIiEhERERERERERERERERERERERERERERAREREREREREREREREREQEAEREREREREREREREREREA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "plus0"
+    },
+    "image68": {
+        "data": "hwQQACAAAAAAd3d3d3d3d3d3d3d3d3cAcHf3d3d3d3d3d3d3d3d3B3d393d3d3d3d3d3d3d3d3d39///d3d3dxERERFxd3d3d3f3d3d3d3dxd3d3cXd3d3d393d3d3d3cXd3d3F3d3d3d3d3d3dVVXV3d3dxd3d3d3f3f3d3VVV1d3d3iHd3d3d3f393d1VVVYWIiIh3d3d393d/d3dVIiKCiIiId3d3d393f3d3dyIigoiIiHd3d3f/////d3ciIiJyd3d3d3d3d3d/d3d3IiIicnd3d3d3d3d3d3d3d3d3d3d3d3d3d3B3d3d3d3d3d3d3d3d3dwcAd3d3d3d3d3d3d3d3d3cA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "plus4zielona"
+    },
+    "image69": {
+        "data": "hwQQACAAAAAAVVVVVVVVVVVVVVVVVVUAUFX1VVVVVVVVVVVVVVVVBVVV9VVVVVVVVVVVVVVVVVVV9f//VVVVVVVVVVVVVVVVVVX1VVVVVVV1d3d3VVVVVVVV9VVVFRERcXd3d1VVVVVVVVVVVRVVVXV3d3dVVVVVVVX1X1UVVVV1d3d3iFVVVVVVX19VFVVVVYWIiIhVVVVV9VVfVRVVIiKCiIiIVVVVVV9VX1UVESIigoiIiFVVVVX/////VVUiIiJSVVVVVVVVVVVfVVVVIiIiUlVVVVVVVVVVVVVVVVVVVVVVVVVVVVBVVVVVVVVVVVVVVVVVVQUAVVVVVVVVVVVVVVVVVVUA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "plus4zolta"
+    },
+    "image70": {
+        "data": "hwQQACAAAAAAIiIiIiIiIiIiIiIiIiIAICLyIiIiIiIiIiIiIiIiAiIi8iIiIiIiIiIiIiIiIiIi8v//IiIiIiIiIiIiIiIiIiLyIiIiIiJyd3d3IiIiIiIi8iIiIiIicnd3dyIiIiIiIiIiIiJVVXV3d3ciIiIiIiLyLyIiVVV1d3d3iCIiIiIiLy8iIlVVVYWIiIgiIiIi8iIvIiJVIiKCiIiIIiIiIi8iLyIiEiIigoiIiCIiIiL/////IhIiIiISIiIiIiIiIiIvIiISIiIiEiIiIiIiIiIiIiIiEhEREREiIiIiIiAiIiIiIiIiIiIiIiIiIgIAIiIiIiIiIiIiIiIiIiIA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "plus4czerwona"
+    },
+    "image71": {
+        "data": "hwQQACAAAAAAiIiIiIiIiIiIiIiIiIgAgIj4iIiIiIiIiIiIiIiICIiI+IiIiIiIiIiIiIiIiIiI+P//iIiIiIiIiIiIiIiIiIj4iIiIiIh4d3d3iIiIiIiI+IiIiIiIeHd3d4iIiIiIiIiIiIhVVXV3d3cRgYiIiIj4j4iIVVV1d3d3iIGIiIiIj4+IiFVVVYWIiIiBiIiI+IiPiIhVIiKCiIiIgYiIiI+Ij4iIiCIigoiIiIGIiIj/////iIgiIiISERGBiIiIiIiPiIiIIiIigoiIiIiIiIiIiIiIiIiIiIiIiIiIiICIiIiIiIiIiIiIiIiIiAgAiIiIiIiIiIiIiIiIiIgA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "plus4niebieska"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",
