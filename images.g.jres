@@ -359,6 +359,31 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "plus4niebieska"
     },
+    "image72": {
+        "data": "hwQQACAAAAAAd3d3d3d3d3d3d3d3d3cAcHd3d3d3d3d3d3d3d3d3B3d3d3d3dyIiVVV3d3d3d3d3d3d3dyciIlVVdXd3d3d3d3d3d3ciIiJVVVV3d3d3d3d3d3cnIiIiVVVVdXd3d3d3d3d3IiIiIlVVVVV3d3d3d3d3dyIiIiJVVVVVd3d3d3d3d3eIiIiId3d3d3F3d3d3d3d3iIiIiHd3d3dxd3d3d3d3d4eIiIh3d3cXd3d3d3d3d3d3iIiId3d3cXd3d3d3d3d3d4eIiHd3F3d3d3d3d3d3d3d3iIh3d3F3d3d3d3B3d3d3d3d3ERF3d3d3dwcAd3d3d3d3d3d3d3d3d3cA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "zmiana_koloru_green"
+    },
+    "image73": {
+        "data": "hwQQACAAAAAAVVVVVVVVVVVVVVVVVVUAUFVVVVVVVVUREVVVVVVVBVVVVVVVVSIiVVVRVVVVVVVVVVVVVSUiIlVVFVVVVVVVVVVVVVUiIiJVVVVRVVVVVVVVVVUlIiIiVVVVFVVVVVVVVVVVIiIiIlVVVVVRVVVVVVVVVSIiIiJVVVVVUVVVVVVVVVWIiIiId3d3d1VVVVVVVVVViIiIiHd3d3dVVVVVVVVVVYWIiIh3d3dXVVVVVVVVVVVViIiId3d3VVVVVVVVVVVVVYWIiHd3V1VVVVVVVVVVVVVViIh3d1VVVVVVVVBVVVVVVVVVVVVVVVVVVQUAVVVVVVVVVVVVVVVVVVUA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "zmiana_koloru_yellow"
+    },
+    "image74": {
+        "data": "hwQQACAAAAAAIiIiIiIiIiIiIiIiIiIAICIiIiIiEREiIiIiIiIiAiIiIiIiEiIiVVUiIiIiIiIiIiIiIiEiIlVVJSIiIiIiIiIiIhIiIiJVVVUiIiIiIiIiIiIhIiIiVVVVJSIiIiIiIiISIiIiIlVVVVUiIiIiIiIiEiIiIiJVVVVVIiIiIiIiIiKIiIiId3d3dyIiIiIiIiIiiIiIiHd3d3ciIiIiIiIiIoKIiIh3d3cnIiIiIiIiIiIiiIiId3d3IiIiIiIiIiIiIoKIiHd3JyIiIiIiIiIiIiIiiIh3dyIiIiIiIiAiIiIiIiIiIiIiIiIiIgIAIiIiIiIiIiIiIiIiIiIA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "zmiana_koloru_red"
+    },
+    "image75": {
+        "data": "hwQQACAAAAAAiIiIiIiIiIiIiIiIiIgAgIiIiIiIiIiIiIiIiIiICIiIiIiIiCIiVVWIiIiIiIiIiIiIiCgiIlVVhYiIiIiIiIiIiIgiIiJVVVWIiIiIiIiIiIgoIiIiVVVVhYiIiIiIiIiIIiIiIlVVVVWIiIiIiIiIiCIiIiJVVVVViIiIiIiIiBiIiIiId3d3d4iIiIiIiIgYiIiIiHd3d3eIiIiIiIiIiIGIiIh3d3eHiIiIiIiIiIgYiIiId3d3iIiIiIiIiIiIiIGIiHd3h4iIiIiIiIiIiIgYiIh3d4iIiIiIiICIiIiIiBERiIiIiIiIiAgAiIiIiIiIiIiIiIiIiIgA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "zmiana_koloru_blue"
+    },
+    "image76": {
+        "data": "hwQPAA8AAAARERERERERAREREREREREBEREREREREQERERERERERAREREREREREBEREREREREQERERERERERAREREREREREBEREREREREQERERERERERAREREREREREBEREREREREQERERERERERAREREREREREBEREREREREQE=",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "bialetlo"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",

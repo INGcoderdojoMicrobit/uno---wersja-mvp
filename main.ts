@@ -69,7 +69,7 @@ function doGraNastepny () {
     pause(1000)
     sprites.destroyAllSpritesOfKind(SpriteKind.Player, effects.disintegrate, 500)
     pause(1000)
-    game.splash("Gra kolejna osoba")
+    game.showLongText("Gra kolejna osoba", DialogLayout.Full)
     pause(500)
     ktoryGracz += 1
     if (ktoryGracz > 4) {
@@ -113,6 +113,7 @@ function doWyswietlReke (numerGracza: number) {
 // 2 Niebieski
 // 3 Zielony
 // 4 Czerwony
+// 0 specjalny (zmiany koloru)
 function doJakiKolorKarty (karta: number) {
     if (karta == 4) {
         return 1
@@ -128,6 +129,8 @@ function doJakiKolorKarty (karta: number) {
         return 1
     } else if (karta == 50) {
         return 1
+    } else if (karta == 56 || karta == 60) {
+        return 1
     }
     if (karta >= 5 && karta <= 13) {
         return 2
@@ -138,6 +141,8 @@ function doJakiKolorKarty (karta: number) {
     } else if (karta == 44) {
         return 2
     } else if (karta == 52) {
+        return 2
+    } else if (karta == 58 || karta == 62) {
         return 2
     }
     if (karta == 2) {
@@ -151,6 +156,8 @@ function doJakiKolorKarty (karta: number) {
     } else if (karta == 48) {
         return 3
     } else if (karta == 53) {
+        return 3
+    } else if (karta == 55 || karta == 59) {
         return 3
     }
     if (karta == 3) {
@@ -167,39 +174,67 @@ function doJakiKolorKarty (karta: number) {
         return 4
     } else if (karta == 51) {
         return 4
+    } else if (karta == 57 || karta == 61) {
+        return 4
     }
     return 0
 }
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (ktoryGracz == 1) {
-        wyswreka = reka1
-    } else if (ktoryGracz == 2) {
-        wyswreka = reka2
-    } else if (ktoryGracz == 3) {
-        wyswreka = reka3
-    } else if (ktoryGracz == 4) {
-        wyswreka = reka4
-    } else {
-        wyswreka = talia
-    }
-    if (gdziewybierak > 0) {
-        gdziewybierak += -1
-        iterator += -1
-    }
-    for (let value2 of sprites.allOfKind(SpriteKind.Player)) {
-        if (value2.x < 0 && gdziewybierak == 0) {
-            iterator += -1
-            doMoveRight()
+    if (czyWybracKolor == 0) {
+        if (ktoryGracz == 1) {
+            wyswreka = reka1
+        } else if (ktoryGracz == 2) {
+            wyswreka = reka2
+        } else if (ktoryGracz == 3) {
+            wyswreka = reka3
+        } else if (ktoryGracz == 4) {
+            wyswreka = reka4
+        } else {
+            wyswreka = talia
         }
-    }
-    if (WybraneKarty[iterator] == 0) {
-        wybierak.setPosition(8 + gdziewybierak * 18, 16)
+        if (gdziewybierak > 0) {
+            gdziewybierak += -1
+            iterator += -1
+        }
+        for (let value2 of sprites.allOfKind(SpriteKind.Player)) {
+            if (value2.x < 0 && gdziewybierak == 0) {
+                iterator += -1
+                doMoveRight()
+            }
+        }
+        if (WybraneKarty[iterator] == 0) {
+            wybierak.setPosition(8 + gdziewybierak * 18, 16)
+        } else {
+            wybierak.setPosition(8 + gdziewybierak * 18, 32)
+        }
     } else {
-        wybierak.setPosition(8 + gdziewybierak * 18, 32)
+        if (KartaNaKupce == 0) {
+            KartaNaKupce = 58
+        } else if (KartaNaKupce == 55) {
+            KartaNaKupce = 58
+        } else if (KartaNaKupce == 56) {
+            KartaNaKupce = 55
+        } else if (KartaNaKupce == 57) {
+            KartaNaKupce = 56
+        } else if (KartaNaKupce == 58) {
+            KartaNaKupce = 57
+        } else if (KartaNaKupce == 1) {
+            KartaNaKupce = 62
+        } else if (KartaNaKupce == 59) {
+            KartaNaKupce = 62
+        } else if (KartaNaKupce == 60) {
+            KartaNaKupce = 59
+        } else if (KartaNaKupce == 61) {
+            KartaNaKupce = 60
+        } else if (KartaNaKupce == 62) {
+            KartaNaKupce = 61
+        }
+        kupka1.setImage(doDajObrazek(KartaNaKupce))
     }
 })
 function doWybierzKolorKartyNaKupce () {
     doWyswietlReke(ktoryGracz)
+    game.showLongText("Wybierz kolor strzałkami lewo-prawo i potwierdź B", DialogLayout.Full)
 }
 function doInicjujTalie () {
     for (let index3 = 0; index3 <= talia.length - 1; index3++) {
@@ -452,8 +487,16 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
             KartaNaKupce = 58
         } else if (KartaNaKupce == 58) {
             KartaNaKupce = 55
-        } else {
-        	
+        } else if (KartaNaKupce == 1) {
+            KartaNaKupce = 59
+        } else if (KartaNaKupce == 59) {
+            KartaNaKupce = 60
+        } else if (KartaNaKupce == 60) {
+            KartaNaKupce = 61
+        } else if (KartaNaKupce == 61) {
+            KartaNaKupce = 62
+        } else if (KartaNaKupce == 62) {
+            KartaNaKupce = 59
         }
         kupka1.setImage(doDajObrazek(KartaNaKupce))
     }
@@ -538,10 +581,10 @@ function doJakaWartoscKarty (karta: number) {
     if (karta == 2 || (karta == 3 || (karta == 4 || karta == 5))) {
         return 12
     }
-    if (karta == 1) {
+    if (karta == 1 || (karta == 59 || (karta == 60 || (karta == 61 || karta == 62)))) {
         return 13
     }
-    if (karta == 0) {
+    if (karta == 0 || (karta == 55 || (karta == 56 || (karta == 57 || karta == 58)))) {
         return 14
     }
     return 2037
@@ -559,39 +602,44 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 controller.B.onEvent(ControllerButtonEvent.Released, function () {
-    if (IleWybranych > 0) {
-        czyZlaKarta = doCzyRuchMozliwy()
-        if (czyZlaKarta == 1) {
-            game.splash("Nie można tak zagrać")
+    if (czyWybracKolor == 0) {
+        if (IleWybranych > 0) {
+            czyZlaKarta = doCzyRuchMozliwy()
+            if (czyZlaKarta == 1) {
+                game.showLongText("Nie można tak zagrać", DialogLayout.Full)
+            } else {
+                doWykonajRuch()
+            }
         } else {
-            doWykonajRuch()
-        }
-    } else {
-        if (game.ask("    Czy dobrać kartę?")) {
-            doDobierzKarte()
-            doWyswietlReke(ktoryGracz)
-            if (IleWybranych == 0) {
-                for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
-                    if (wybierak.x == value4.x) {
-                        value4.startEffect(effects.bubbles, 1000)
-                        value4.y = 32
-                        wybierak.y = 32
-                        WybraneKarty[iterator] = 1
-                        IleWybranych += 1
+            if (game.ask("    Czy dobrać kartę?")) {
+                doDobierzKarte()
+                doWyswietlReke(ktoryGracz)
+                if (IleWybranych == 0) {
+                    for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
+                        if (wybierak.x == value4.x) {
+                            value4.startEffect(effects.bubbles, 1000)
+                            value4.y = 32
+                            wybierak.y = 32
+                            WybraneKarty[iterator] = 1
+                            IleWybranych += 1
+                        }
                     }
                 }
-            }
-            pause(1000)
-            czyZlaKarta = doCzyRuchMozliwy()
-            if (czyZlaKarta == 0) {
-                if (game.ask("    Czy zagrać kartą?")) {
-                    doWykonajRuch()
+                pause(1000)
+                czyZlaKarta = doCzyRuchMozliwy()
+                if (czyZlaKarta == 0) {
+                    if (game.ask("    Czy zagrać kartą?")) {
+                        doWykonajRuch()
+                    }
+                } else {
+                    game.showLongText("Nie możesz zagrać kartą...", DialogLayout.Full)
+                    doGraNastepny()
                 }
-            } else {
-                game.splash("Nie możesz zagrać kartą...")
-                doGraNastepny()
             }
         }
+    } else {
+        czyWybracKolor = 0
+        doGraNastepny()
     }
 })
 function doRozdajKarty (ileGraczy: number) {
@@ -747,6 +795,14 @@ function doDajObrazek (numerKarty: number) {
         obrazeKarty = assets.image`plus4czerwona`
     } else if (numerKarty == 58) {
         obrazeKarty = assets.image`plus4niebieska`
+    } else if (numerKarty == 59) {
+        obrazeKarty = assets.image`zmiana_koloru_green`
+    } else if (numerKarty == 60) {
+        obrazeKarty = assets.image`zmiana_koloru_yellow`
+    } else if (numerKarty == 61) {
+        obrazeKarty = assets.image`zmiana_koloru_red`
+    } else if (numerKarty == 62) {
+        obrazeKarty = assets.image`zmiana_koloru_blue`
     } else {
         obrazeKarty = assets.image`myImage`
         game.splash(numerKarty)
@@ -772,12 +828,12 @@ let mySprite: Sprite = null
 let kartalosowana = 0
 let koniecPetli = 0
 let czyZlaKarta = 0
-let czyWybracKolor = 0
 let reka4: number[] = []
 let reka3: number[] = []
 let reka2: number[] = []
 let reka1: number[] = []
 let wyswreka: number[] = []
+let czyWybracKolor = 0
 let ktoryGracz = 0
 let kupka1: Sprite = null
 let KartaNaKupce = 0
@@ -818,3 +874,5 @@ ktoryGracz = 1
 doRozdajKarty(4)
 doWyswietlReke(ktoryGracz)
 doWyswietlGracza(ktoryGracz)
+game.setDialogFrame(assets.image`bialetlo`)
+czyWybracKolor = 0
