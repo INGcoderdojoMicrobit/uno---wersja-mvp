@@ -49,9 +49,12 @@ function doWykonajRuch () {
         }
     }
     pause(1000)
+    kupka1.setImage(doDajObrazek(KartaNaKupce))
+    doGraNastepny()
+}
+function doGraNastepny () {
     doWyswietlReke(ktoryGracz)
     doWyswietlGracza(ktoryGracz)
-    kupka1.setImage(doDajObrazek(KartaNaKupce))
     wybierak.y = 16
     IleWybranych = 0
     pause(1000)
@@ -371,9 +374,7 @@ function doCzyRuchMozliwy () {
     czyZlaKarta = 0
     for (let index210 = 0; index210 <= WybraneKarty.length - 1; index210++) {
         if (WybraneKarty[index210] == 1) {
-            if (doJakiKolorKarty(wyswreka[index210]) == doJakiKolorKarty(KartaNaKupce)) {
-            	
-            } else {
+            if (doJakiKolorKarty(wyswreka[index210]) != doJakiKolorKarty(KartaNaKupce)) {
                 czyZlaKarta = 1
             }
         }
@@ -383,8 +384,6 @@ function doCzyRuchMozliwy () {
             if (WybraneKarty[index211] == 1) {
                 if (doJakaWartoscKarty(wyswreka[index211]) == doJakaWartoscKarty(KartaNaKupce)) {
                     czyZlaKarta = 0
-                } else {
-                    czyZlaKarta = 1
                 }
             }
         }
@@ -541,25 +540,26 @@ controller.B.onEvent(ControllerButtonEvent.Released, function () {
         if (game.ask("    Czy dobrać kartę?")) {
             doDobierzKarte()
             doWyswietlReke(ktoryGracz)
-            game.splash("Dodaliśmy kartę na początku!")
-            czyZlaKarta = doCzyRuchMozliwy()
-            if (czyZlaKarta == 0) {
-                if (IleWybranych == 0) {
-                    for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
-                        if (wybierak.x == value4.x) {
-                            value4.y = 32
-                            wybierak.y = 32
-                            WybraneKarty[iterator] = 1
-                            IleWybranych += 1
-                        }
+            if (IleWybranych == 0) {
+                for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
+                    if (wybierak.x == value4.x) {
+                        value4.startEffect(effects.bubbles, 1000)
+                        value4.y = 32
+                        wybierak.y = 32
+                        WybraneKarty[iterator] = 1
+                        IleWybranych += 1
                     }
                 }
-                pause(500)
+            }
+            pause(1000)
+            czyZlaKarta = doCzyRuchMozliwy()
+            if (czyZlaKarta == 0) {
                 if (game.ask("    Czy zagrać kartą?")) {
                     doWykonajRuch()
                 }
             } else {
-                game.splash("Coś nam to nie działa")
+                game.splash("Nie możesz zagrać kartą...")
+                doGraNastepny()
             }
         }
     }
