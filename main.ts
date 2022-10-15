@@ -20,12 +20,17 @@ function doWykonajRuch () {
     } else {
         wyswreka = talia
     }
+    czyWybracKolor = 0
     czyZlaKarta = 0
     for (let index210 = 0; index210 <= WybraneKarty.length - 1; index210++) {
         if (WybraneKarty[index210] == 1) {
             if (doJakiKolorKarty(wyswreka[index210]) == doJakiKolorKarty(KartaNaKupce)) {
                 KartaNaKupce = wyswreka.removeAt(index210)
             } else {
+                if (doJakiKolorKarty(wyswreka[index210]) == 0) {
+                    KartaNaKupce = wyswreka.removeAt(index210)
+                    czyWybracKolor = 1
+                }
                 czyZlaKarta = 1
             }
         }
@@ -50,6 +55,9 @@ function doWykonajRuch () {
     }
     pause(1000)
     kupka1.setImage(doDajObrazek(KartaNaKupce))
+    if (czyWybracKolor == 1) {
+        doWybierzKolorKartyNaKupce()
+    }
     doGraNastepny()
 }
 function doGraNastepny () {
@@ -189,6 +197,9 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
         wybierak.setPosition(8 + gdziewybierak * 18, 32)
     }
 })
+function doWybierzKolorKartyNaKupce () {
+    game.splash("Wybierz kolor strzałkami lewo-prawo i potwierdź A")
+}
 function doInicjujTalie () {
     for (let index3 = 0; index3 <= talia.length - 1; index3++) {
         talia.pop()
@@ -375,7 +386,11 @@ function doCzyRuchMozliwy () {
     for (let index210 = 0; index210 <= WybraneKarty.length - 1; index210++) {
         if (WybraneKarty[index210] == 1) {
             if (doJakiKolorKarty(wyswreka[index210]) != doJakiKolorKarty(KartaNaKupce)) {
-                czyZlaKarta = 1
+                if (doJakiKolorKarty(wyswreka[index210]) != 0) {
+                    czyZlaKarta = 1
+                } else {
+                    czyZlaKarta = 0
+                }
             }
         }
     }
@@ -402,30 +417,34 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     } else {
         wyswreka = talia
     }
-    if (gdziewybierak < 8) {
-        if (gdziewybierak < wyswreka.length - 1) {
-            gdziewybierak += 1
-            iterator += 1
-            wybierak.setPosition(8 + gdziewybierak * 18, 16)
+    if (czyWybracKolor == 0) {
+        if (gdziewybierak < 8) {
+            if (gdziewybierak < wyswreka.length - 1) {
+                gdziewybierak += 1
+                iterator += 1
+                wybierak.setPosition(8 + gdziewybierak * 18, 16)
+            }
         }
-    }
-    for (let value22 of sprites.allOfKind(SpriteKind.Player)) {
-        if (value22.x > scene.screenWidth() && gdziewybierak == 8) {
-            iterator += 1
-            for (let value3 of sprites.allOfKind(SpriteKind.Player)) {
-                for (let index59 = 0; index59 <= 5; index59++) {
-                    value3.x += 3 * -1
-                    if (value3.x >= 0 && value3.x <= scene.screenWidth()) {
-                        pause(10)
+        for (let value22 of sprites.allOfKind(SpriteKind.Player)) {
+            if (value22.x > scene.screenWidth() && gdziewybierak == 8) {
+                iterator += 1
+                for (let value3 of sprites.allOfKind(SpriteKind.Player)) {
+                    for (let index59 = 0; index59 <= 5; index59++) {
+                        value3.x += 3 * -1
+                        if (value3.x >= 0 && value3.x <= scene.screenWidth()) {
+                            pause(10)
+                        }
                     }
                 }
             }
         }
-    }
-    if (WybraneKarty[iterator] == 0) {
-        wybierak.setPosition(8 + gdziewybierak * 18, 16)
+        if (WybraneKarty[iterator] == 0) {
+            wybierak.setPosition(8 + gdziewybierak * 18, 16)
+        } else {
+            wybierak.setPosition(8 + gdziewybierak * 18, 32)
+        }
     } else {
-        wybierak.setPosition(8 + gdziewybierak * 18, 32)
+    	
     }
 })
 function doWyswietlGracza (numerGracza: number) {
@@ -735,6 +754,7 @@ let mySprite: Sprite = null
 let kartalosowana = 0
 let koniecPetli = 0
 let czyZlaKarta = 0
+let czyWybracKolor = 0
 let reka4: number[] = []
 let reka3: number[] = []
 let reka2: number[] = []
