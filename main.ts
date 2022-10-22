@@ -25,6 +25,9 @@ function doWykonajRuch () {
     for (let index210 = 0; index210 <= WybraneKarty.length - 1; index210++) {
         if (WybraneKarty[index210] == 1) {
             if (doJakiKolorKarty(wyswreka[index210]) == doJakiKolorKarty(KartaNaKupce)) {
+                if (wyswreka[index210] == 2 || (wyswreka[index210] == 3 || (wyswreka[index210] == 4 || wyswreka[index210] == 5))) {
+                    kierunek = kierunek * -1
+                }
                 KartaNaKupce = wyswreka.removeAt(index210)
             } else {
                 if (doJakiKolorKarty(wyswreka[index210]) == 0) {
@@ -39,6 +42,10 @@ function doWykonajRuch () {
         for (let index211 = 0; index211 <= WybraneKarty.length - 1; index211++) {
             if (WybraneKarty[index211] == 1) {
                 if (doJakaWartoscKarty(wyswreka[index211]) == doJakaWartoscKarty(KartaNaKupce)) {
+                    let index210 = 0
+                    if (wyswreka[index210] == 2 || (wyswreka[index210] == 3 || (wyswreka[index210] == 4 || wyswreka[index210] == 5))) {
+                        kierunek = kierunek * -1
+                    }
                     czyZlaKarta = 0
                     KartaNaKupce = wyswreka.removeAt(index211)
                 } else {
@@ -71,9 +78,11 @@ function doGraNastepny () {
     pause(1000)
     game.showLongText("Gra kolejna osoba", DialogLayout.Full)
     pause(500)
-    ktoryGracz += 1
-    if (ktoryGracz > 4) {
+    ktoryGracz += kierunek
+    if (ktoryGracz > IluGraczy) {
         ktoryGracz = 1
+    } else if (ktoryGracz < 1) {
+        ktoryGracz = IluGraczy
     }
     doWyswietlReke(ktoryGracz)
     doWyswietlGracza(ktoryGracz)
@@ -834,6 +843,8 @@ let reka2: number[] = []
 let reka1: number[] = []
 let wyswreka: number[] = []
 let czyWybracKolor = 0
+let IluGraczy = 0
+let kierunek = 0
 let ktoryGracz = 0
 let kupka1: Sprite = null
 let KartaNaKupce = 0
@@ -871,6 +882,8 @@ textSprite2.setPosition(135, 96)
 let textSprite3 = textsprite.create("6")
 textSprite3.setPosition(145, 106)
 ktoryGracz = 1
+kierunek = 1
+IluGraczy = 4
 doRozdajKarty(4)
 doWyswietlReke(ktoryGracz)
 doWyswietlGracza(ktoryGracz)
