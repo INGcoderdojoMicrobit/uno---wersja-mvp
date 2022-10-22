@@ -27,6 +27,8 @@ function doWykonajRuch () {
             if (doJakiKolorKarty(wyswreka[index210]) == doJakiKolorKarty(KartaNaKupce)) {
                 if (wyswreka[index210] == 2 || (wyswreka[index210] == 3 || (wyswreka[index210] == 4 || wyswreka[index210] == 5))) {
                     kierunek = kierunek * -1
+                } else if (doJakaWartoscKarty(wyswreka[index210]) == 10) {
+                    IlePauzy += 1
                 }
                 KartaNaKupce = wyswreka.removeAt(index210)
             } else {
@@ -42,9 +44,10 @@ function doWykonajRuch () {
         for (let index211 = 0; index211 <= WybraneKarty.length - 1; index211++) {
             if (WybraneKarty[index211] == 1) {
                 if (doJakaWartoscKarty(wyswreka[index211]) == doJakaWartoscKarty(KartaNaKupce)) {
-                    let index210 = 0
-                    if (wyswreka[index210] == 2 || (wyswreka[index210] == 3 || (wyswreka[index210] == 4 || wyswreka[index210] == 5))) {
+                    if (wyswreka[index211] == 2 || (wyswreka[index211] == 3 || (wyswreka[index211] == 4 || wyswreka[index211] == 5))) {
                         kierunek = kierunek * -1
+                    } else if (doJakaWartoscKarty(wyswreka[index211]) == 10) {
+                        IlePauzy += 1
                     }
                     czyZlaKarta = 0
                     KartaNaKupce = wyswreka.removeAt(index211)
@@ -76,14 +79,22 @@ function doGraNastepny () {
     pause(1000)
     sprites.destroyAllSpritesOfKind(SpriteKind.Player, effects.disintegrate, 500)
     pause(1000)
-    game.showLongText("Gra kolejna osoba", DialogLayout.Full)
-    pause(500)
-    ktoryGracz += kierunek
-    if (ktoryGracz > IluGraczy) {
-        ktoryGracz = 1
-    } else if (ktoryGracz < 1) {
-        ktoryGracz = IluGraczy
+    doGraczPlusJeden()
+    if (IlePauzy > 0) {
+        if (ktoryGracz == 1) {
+            IlePauzy1 += IlePauzy
+        } else if (ktoryGracz == 2) {
+            IlePauzy2 += IlePauzy
+        } else if (ktoryGracz == 3) {
+            IlePauzy3 += IlePauzy
+        } else if (ktoryGracz == 4) {
+            IlePauzy4 += IlePauzy
+        }
+        IlePauzy = 0
     }
+    doPauzy()
+    game.showLongText("Gra teraz " + ktoryGracz + " gracz", DialogLayout.Full)
+    pause(500)
     doWyswietlReke(ktoryGracz)
     doWyswietlGracza(ktoryGracz)
 }
@@ -244,6 +255,47 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
 function doWybierzKolorKartyNaKupce () {
     doWyswietlReke(ktoryGracz)
     game.showLongText("Wybierz kolor strzałkami lewo-prawo i potwierdź B", DialogLayout.Full)
+}
+function doPauzy () {
+    KoniecPauzy = true
+    while (KoniecPauzy) {
+        if (ktoryGracz == 1) {
+            if (IlePauzy1 > 0) {
+                komunikat = "Pauzuje teraz " + ktoryGracz + " gracz przez " + IlePauzy1 + " kolejek"
+                IlePauzy1 += -1
+                doGraczPlusJeden()
+            } else {
+                KoniecPauzy = false
+            }
+        } else if (ktoryGracz == 2) {
+            if (IlePauzy2 > 0) {
+                komunikat = "Pauzuje teraz " + ktoryGracz + " gracz przez " + IlePauzy2 + " kolejek"
+                IlePauzy2 += -1
+                doGraczPlusJeden()
+            } else {
+                KoniecPauzy = false
+            }
+        } else if (ktoryGracz == 3) {
+            if (IlePauzy3 > 0) {
+                komunikat = "Pauzuje teraz " + ktoryGracz + " gracz przez " + IlePauzy3 + " kolejek"
+                IlePauzy3 += -1
+                doGraczPlusJeden()
+            } else {
+                KoniecPauzy = false
+            }
+        } else if (ktoryGracz == 4) {
+            if (IlePauzy4 > 0) {
+                komunikat = "Pauzuje teraz " + ktoryGracz + " gracz przez " + IlePauzy4 + " kolejek"
+                IlePauzy4 += -1
+                doGraczPlusJeden()
+            } else {
+                KoniecPauzy = false
+            }
+        }
+        doWyswietlReke(ktoryGracz)
+        doWyswietlGracza(ktoryGracz)
+        game.showLongText(komunikat, DialogLayout.Full)
+    }
 }
 function doInicjujTalie () {
     for (let index3 = 0; index3 <= talia.length - 1; index3++) {
@@ -410,6 +462,14 @@ function doInicjujTalie () {
     }
     for (let index = 0; index < 2; index++) {
         talia.unshift(42)
+    }
+}
+function doGraczPlusJeden () {
+    ktoryGracz += kierunek
+    if (ktoryGracz > IluGraczy) {
+        ktoryGracz = 1
+    } else if (ktoryGracz < 1) {
+        ktoryGracz = IluGraczy
     }
 }
 function doCzyRuchMozliwy () {
@@ -675,6 +735,14 @@ function doRozdajKarty (ileGraczy: number) {
             reka4.unshift(talia.removeAt(randint(0, talia.length - 1)))
         }
     }
+    reka1.unshift(47)
+    reka1.unshift(48)
+    reka1.unshift(49)
+    reka1.unshift(6)
+    reka2.unshift(47)
+    reka2.unshift(48)
+    reka2.unshift(49)
+    reka2.unshift(6)
 }
 function doMoveRight () {
     for (let index310 = 0; index310 <= sprites.allOfKind(SpriteKind.Player).length - 1; index310++) {
@@ -833,6 +901,8 @@ function doDobierzKarte () {
 let KartaDobrana = 0
 let obrazeKarty: Image = null
 let value32: Sprite = null
+let komunikat = ""
+let KoniecPauzy = false
 let mySprite: Sprite = null
 let kartalosowana = 0
 let koniecPetli = 0
@@ -844,6 +914,11 @@ let reka1: number[] = []
 let wyswreka: number[] = []
 let czyWybracKolor = 0
 let IluGraczy = 0
+let IlePauzy4 = 0
+let IlePauzy3 = 0
+let IlePauzy2 = 0
+let IlePauzy1 = 0
+let IlePauzy = 0
 let kierunek = 0
 let ktoryGracz = 0
 let kupka1: Sprite = null
@@ -883,6 +958,11 @@ let textSprite3 = textsprite.create("6")
 textSprite3.setPosition(145, 106)
 ktoryGracz = 1
 kierunek = 1
+IlePauzy = 0
+IlePauzy1 = 0
+IlePauzy2 = 0
+IlePauzy3 = 0
+IlePauzy4 = 0
 IluGraczy = 4
 doRozdajKarty(4)
 doWyswietlReke(ktoryGracz)
