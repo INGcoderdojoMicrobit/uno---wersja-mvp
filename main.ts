@@ -80,18 +80,6 @@ function doGraNastepny () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Player, effects.disintegrate, 500)
     pause(1000)
     doGraczPlusJeden()
-    if (IlePauzy > 0) {
-        if (ktoryGracz == 1) {
-            IlePauzy1 += IlePauzy
-        } else if (ktoryGracz == 2) {
-            IlePauzy2 += IlePauzy
-        } else if (ktoryGracz == 3) {
-            IlePauzy3 += IlePauzy
-        } else if (ktoryGracz == 4) {
-            IlePauzy4 += IlePauzy
-        }
-        IlePauzy = 0
-    }
     doPauzy()
     game.showLongText("Gra teraz " + ktoryGracz + " gracz", DialogLayout.Full)
     pause(500)
@@ -472,7 +460,7 @@ function doGraczPlusJeden () {
         ktoryGracz = IluGraczy
     }
 }
-function doCzyRuchMozliwy () {
+function doCzyRuchMozliwy (PorKarta: number) {
     if (ktoryGracz == 1) {
         wyswreka = reka1
     } else if (ktoryGracz == 2) {
@@ -493,6 +481,8 @@ function doCzyRuchMozliwy () {
                 } else {
                     czyZlaKarta = 0
                 }
+            } else if (doJakaWartoscKarty(wyswreka[index210]) != 10 && doJakaWartoscKarty(PorKarta) == 10) {
+                czyZlaKarta = 1
             }
         }
     }
@@ -673,36 +663,49 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
 controller.B.onEvent(ControllerButtonEvent.Released, function () {
     if (czyWybracKolor == 0) {
         if (IleWybranych > 0) {
-            czyZlaKarta = doCzyRuchMozliwy()
+            if (IlePauzy > 0) {
+                czyZlaKarta = doCzyRuchMozliwy(KartaNaKupce)
+            } else {
+                czyZlaKarta = doCzyRuchMozliwy(0)
+            }
             if (czyZlaKarta == 1) {
                 game.showLongText("Nie można tak zagrać", DialogLayout.Full)
             } else {
                 doWykonajRuch()
             }
         } else {
-            if (game.ask("    Czy dobrać kartę?")) {
-                doDobierzKarte()
-                doWyswietlReke(ktoryGracz)
-                if (IleWybranych == 0) {
-                    for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
-                        if (wybierak.x == value4.x) {
-                            value4.startEffect(effects.bubbles, 1000)
-                            value4.y = 32
-                            wybierak.y = 32
-                            WybraneKarty[iterator] = 1
-                            IleWybranych += 1
+            if (IlePauzy > 0) {
+                if (ktoryGracz == 1) {
+                    IlePauzy1 += IlePauzy
+                } else if (ktoryGracz == 2) {
+                    IlePauzy2 += IlePauzy
+                } else if (ktoryGracz == 3) {
+                    IlePauzy3 += IlePauzy
+                } else if (ktoryGracz == 4) {
+                    IlePauzy4 += IlePauzy
+                }
+                IlePauzy = 0
+            } else {
+                if (game.ask("    Czy dobrać kartę?")) {
+                    doDobierzKarte()
+                    doWyswietlReke(ktoryGracz)
+                    if (IleWybranych == 0) {
+                        for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
+                            if (wybierak.x == value4.x) {
+                                value4.startEffect(effects.bubbles, 1000)
+                            }
                         }
                     }
-                }
-                pause(1000)
-                czyZlaKarta = doCzyRuchMozliwy()
-                if (czyZlaKarta == 0) {
-                    if (game.ask("    Czy zagrać kartą?")) {
-                        doWykonajRuch()
+                    pause(1000)
+                    czyZlaKarta = doCzyRuchMozliwy(1)
+                    if (czyZlaKarta == 0) {
+                        if (game.ask("    Czy zagrać kartą?")) {
+                            doWykonajRuch()
+                        }
+                    } else {
+                        game.showLongText("Nie możesz zagrać kartą...", DialogLayout.Full)
+                        doGraNastepny()
                     }
-                } else {
-                    game.showLongText("Nie możesz zagrać kartą...", DialogLayout.Full)
-                    doGraNastepny()
                 }
             }
         }
