@@ -564,15 +564,31 @@ function doWyswietlGracza (numerGracza: number) {
     if (numerGracza == 1) {
         gracz1.setImage(assets.image`cat1`)
         textGracz1.setText("Player1")
+        if (IlePauzy1 > 0) {
+            textSprite2.setText("Pauzujesz: ")
+            textSprite3.setText(convertToText(IlePauzy1))
+        }
     } else if (numerGracza == 2) {
         gracz1.setImage(assets.image`forestMonkey0`)
         textGracz1.setText("Player2")
+        if (IlePauzy2 > 0) {
+            textSprite2.setText("Pauzujesz: ")
+            textSprite3.setText(convertToText(IlePauzy2))
+        }
     } else if (numerGracza == 3) {
         gracz1.setImage(assets.image`forestSnake0`)
         textGracz1.setText("Player3")
+        if (IlePauzy3 > 0) {
+            textSprite2.setText("Pauzujesz: ")
+            textSprite3.setText(convertToText(IlePauzy3))
+        }
     } else if (numerGracza == 4) {
         gracz1.setImage(assets.image`duck5`)
         textGracz1.setText("Player4")
+        if (IlePauzy4 > 0) {
+            textSprite2.setText("Pauzujesz: ")
+            textSprite3.setText(convertToText(IlePauzy4))
+        }
     } else {
         gracz1.setImage(img`
             . . . . . . . . . . . . . . . . 
@@ -593,6 +609,10 @@ function doWyswietlGracza (numerGracza: number) {
             . . . . . . . . . . . . . . . . 
             `)
         textGracz1.setText("")
+    }
+    if (IlePauzy > 0) {
+        textSprite2.setText("Pauzy: ")
+        textSprite3.setText(convertToText(IlePauzy))
     }
 }
 // 10 - POSTÓJ
@@ -924,6 +944,8 @@ let IlePauzy1 = 0
 let IlePauzy = 0
 let kierunek = 0
 let ktoryGracz = 0
+let textSprite3: TextSprite = null
+let textSprite2: TextSprite = null
 let kupka1: Sprite = null
 let KartaNaKupce = 0
 let textGracz1: TextSprite = null
@@ -955,9 +977,9 @@ textGracz1.setPosition(20, 90)
 KartaNaKupce = 31
 kupka1 = sprites.create(assets.image`4green`, SpriteKind.Enemy)
 kupka1.setPosition(77, 78)
-let textSprite2 = textsprite.create("dobierz:")
+textSprite2 = textsprite.create("dobierz:")
 textSprite2.setPosition(135, 96)
-let textSprite3 = textsprite.create("6")
+textSprite3 = textsprite.create("6")
 textSprite3.setPosition(145, 106)
 ktoryGracz = 1
 kierunek = 1
