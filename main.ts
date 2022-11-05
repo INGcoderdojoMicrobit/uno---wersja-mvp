@@ -29,6 +29,8 @@ function doWykonajRuch () {
                     kierunek = kierunek * -1
                 } else if (doJakaWartoscKarty(wyswreka[index210]) == 10) {
                     IlePauzy += 1
+                } else if (doJakaWartoscKarty(wyswreka[index210]) == 11) {
+                    IleDobranych += 2
                 }
                 KartaNaKupce = wyswreka.removeAt(index210)
             } else {
@@ -48,6 +50,8 @@ function doWykonajRuch () {
                         kierunek = kierunek * -1
                     } else if (doJakaWartoscKarty(wyswreka[index211]) == 10) {
                         IlePauzy += 1
+                    } else if (doJakaWartoscKarty(wyswreka[index211]) == 11) {
+                        IleDobranych += 2
                     }
                     czyZlaKarta = 0
                     KartaNaKupce = wyswreka.removeAt(index211)
@@ -968,6 +972,7 @@ let talia: number[] = []
 talia = []
 WybraneKarty = []
 iterator = 0
+let IleDobranych = 0
 gdziewybierak = 0
 IleWybranych = 0
 wybierak = sprites.create(assets.image`selector_off`, SpriteKind.Enemy)
