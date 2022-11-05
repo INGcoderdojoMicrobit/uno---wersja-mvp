@@ -622,6 +622,10 @@ function doWyswietlGracza (numerGracza: number) {
         textSprite2.setText("Pauzy: ")
         textSprite3.setText(convertToText(IlePauzy))
     }
+    if (IleDobranych > 0) {
+        textSprite2.setText("Dobierz: ")
+        textSprite3.setText(convertToText(IleDobranych))
+    }
 }
 // 10 - POSTÓJ
 // 11 - WEŹ 2
@@ -771,14 +775,14 @@ function doRozdajKarty (ileGraczy: number) {
             reka4.unshift(talia.removeAt(randint(0, talia.length - 1)))
         }
     }
-    reka1.unshift(47)
-    reka1.unshift(48)
-    reka1.unshift(49)
-    reka1.unshift(6)
-    reka2.unshift(47)
-    reka2.unshift(48)
-    reka2.unshift(49)
-    reka2.unshift(6)
+    reka1.unshift(50)
+    reka1.unshift(51)
+    reka1.unshift(52)
+    reka1.unshift(53)
+    reka2.unshift(50)
+    reka2.unshift(51)
+    reka2.unshift(52)
+    reka2.unshift(53)
 }
 function doMoveRight () {
     for (let index310 = 0; index310 <= sprites.allOfKind(SpriteKind.Player).length - 1; index310++) {
@@ -966,13 +970,14 @@ let gracz1: Sprite = null
 let wybierak: Sprite = null
 let IleWybranych = 0
 let gdziewybierak = 0
+let IleDobranych = 0
 let iterator = 0
 let WybraneKarty: number[] = []
 let talia: number[] = []
 talia = []
 WybraneKarty = []
 iterator = 0
-let IleDobranych = 0
+IleDobranych = 0
 gdziewybierak = 0
 IleWybranych = 0
 wybierak = sprites.create(assets.image`selector_off`, SpriteKind.Enemy)
