@@ -253,6 +253,7 @@ function doPauzy () {
                 komunikat = "Pauzuje teraz " + ktoryGracz + " gracz przez " + IlePauzy1 + " kolejek"
                 IlePauzy1 += -1
                 doGraczPlusJeden()
+                game.showLongText(komunikat, DialogLayout.Full)
             } else {
                 KoniecPauzy = false
             }
@@ -261,6 +262,7 @@ function doPauzy () {
                 komunikat = "Pauzuje teraz " + ktoryGracz + " gracz przez " + IlePauzy2 + " kolejek"
                 IlePauzy2 += -1
                 doGraczPlusJeden()
+                game.showLongText(komunikat, DialogLayout.Full)
             } else {
                 KoniecPauzy = false
             }
@@ -269,6 +271,7 @@ function doPauzy () {
                 komunikat = "Pauzuje teraz " + ktoryGracz + " gracz przez " + IlePauzy3 + " kolejek"
                 IlePauzy3 += -1
                 doGraczPlusJeden()
+                game.showLongText(komunikat, DialogLayout.Full)
             } else {
                 KoniecPauzy = false
             }
@@ -277,13 +280,13 @@ function doPauzy () {
                 komunikat = "Pauzuje teraz " + ktoryGracz + " gracz przez " + IlePauzy4 + " kolejek"
                 IlePauzy4 += -1
                 doGraczPlusJeden()
+                game.showLongText(komunikat, DialogLayout.Full)
             } else {
                 KoniecPauzy = false
             }
         }
         doWyswietlReke(ktoryGracz)
         doWyswietlGracza(ktoryGracz)
-        game.showLongText(komunikat, DialogLayout.Full)
     }
 }
 function doInicjujTalie () {
@@ -706,6 +709,7 @@ controller.B.onEvent(ControllerButtonEvent.Released, function () {
                     IlePauzy4 += IlePauzy
                 }
                 IlePauzy = 0
+                doPauzy()
             } else {
                 if (game.ask("    Czy dobrać kartę?")) {
                     doDobierzKarte()
@@ -714,6 +718,10 @@ controller.B.onEvent(ControllerButtonEvent.Released, function () {
                         for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
                             if (wybierak.x == value4.x) {
                                 value4.startEffect(effects.bubbles, 1000)
+                                value4.y = 32
+                                wybierak.y = 32
+                                WybraneKarty[iterator] = 1
+                                IleWybranych += 1
                             }
                         }
                     }
