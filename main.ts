@@ -245,6 +245,7 @@ function doWybierzKolorKartyNaKupce () {
     game.showLongText("Wybierz kolor strzałkami lewo-prawo i potwierdź B", DialogLayout.Full)
 }
 function doPauzy () {
+    komunikat = "to zły komunikat jest.. gra teraz gracz: " + ktoryGracz + "nazbierane pauzy:" + IlePauzy + "to jest błąd"
     KoniecPauzy = true
     while (KoniecPauzy) {
         if (ktoryGracz == 1) {
@@ -924,8 +925,8 @@ function doDobierzKarte () {
 let KartaDobrana = 0
 let obrazeKarty: Image = null
 let value32: Sprite = null
-let komunikat = ""
 let KoniecPauzy = false
+let komunikat = ""
 let mySprite: Sprite = null
 let kartalosowana = 0
 let koniecPetli = 0
