@@ -491,6 +491,8 @@ function doCzyRuchMozliwy (PorKarta: number) {
                 }
             } else if (doJakaWartoscKarty(wyswreka[index210]) != 10 && doJakaWartoscKarty(PorKarta) == 10) {
                 czyZlaKarta = 1
+            } else if (doJakaWartoscKarty(wyswreka[index210]) != 11 && doJakaWartoscKarty(PorKarta) == 11) {
+                czyZlaKarta = 1
             }
         }
     }
@@ -621,10 +623,16 @@ function doWyswietlGracza (numerGracza: number) {
     if (IlePauzy > 0) {
         textSprite2.setText("Pauzy: ")
         textSprite3.setText(convertToText(IlePauzy))
+    } else {
+        textSprite2.setText("")
+        textSprite3.setText("")
     }
     if (IleDobranych > 0) {
         textSprite2.setText("Dobierz: ")
         textSprite3.setText(convertToText(IleDobranych))
+    } else {
+        textSprite2.setText("")
+        textSprite3.setText("")
     }
 }
 // 10 - POSTÓJ
@@ -695,7 +703,7 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
 controller.B.onEvent(ControllerButtonEvent.Released, function () {
     if (czyWybracKolor == 0) {
         if (IleWybranych > 0) {
-            if (IlePauzy > 0) {
+            if (IlePauzy > 0 || IleDobranych > 0) {
                 czyZlaKarta = doCzyRuchMozliwy(KartaNaKupce)
             } else {
                 czyZlaKarta = doCzyRuchMozliwy(0)
@@ -718,9 +726,17 @@ controller.B.onEvent(ControllerButtonEvent.Released, function () {
                 }
                 IlePauzy = 0
                 doPauzy()
+            } else if (IleDobranych > 0) {
+                komunikat = "Dobieram " + IleDobranych + " kart z talii.."
+                game.showLongText(komunikat, DialogLayout.Full)
+                doDobierzKarte(IleDobranych)
+                IleDobranych = 0
+                doWyswietlReke(ktoryGracz)
+                doWyswietlGracza(ktoryGracz)
+                doGraNastepny()
             } else {
                 if (game.ask("    Czy dobrać kartę?")) {
-                    doDobierzKarte()
+                    doDobierzKarte(1)
                     doWyswietlReke(ktoryGracz)
                     if (IleWybranych == 0) {
                         for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
@@ -926,17 +942,24 @@ function doDajObrazek (numerKarty: number) {
     }
     return obrazeKarty
 }
-function doDobierzKarte () {
-    if (ktoryGracz == 1) {
-        reka1.unshift(talia.removeAt(randint(0, talia.length - 1)))
-    } else if (ktoryGracz == 2) {
-        reka2.unshift(talia.removeAt(randint(0, talia.length - 1)))
-    } else if (ktoryGracz == 3) {
-        reka3.unshift(talia.removeAt(randint(0, talia.length - 1)))
-    } else if (ktoryGracz == 4) {
-        reka4.unshift(talia.removeAt(randint(0, talia.length - 1)))
+function doDobierzKarte (IleKartDobrac: number) {
+    for (let index = 0; index <= IleKartDobrac - 1; index++) {
+        if (talia.length > 0) {
+            if (ktoryGracz == 1) {
+                reka1.unshift(talia.removeAt(randint(0, talia.length - 1)))
+            } else if (ktoryGracz == 2) {
+                reka2.unshift(talia.removeAt(randint(0, talia.length - 1)))
+            } else if (ktoryGracz == 3) {
+                reka3.unshift(talia.removeAt(randint(0, talia.length - 1)))
+            } else if (ktoryGracz == 4) {
+                reka4.unshift(talia.removeAt(randint(0, talia.length - 1)))
+            }
+            KartaDobrana = 1
+        } else {
+            game.showLongText("Talia pusta! Nie dobieram więcej kart...", DialogLayout.Full)
+            break;
+        }
     }
-    KartaDobrana = 1
 }
 let KartaDobrana = 0
 let obrazeKarty: Image = null
