@@ -505,6 +505,12 @@ function doCzyRuchMozliwy (PorKarta: number) {
                         } else {
                             czyZlaKarta = 0
                         }
+                    } else if (doJakaWartoscKarty(wyswreka[index210]) == 13) {
+                        if (IleDobranych > 0) {
+                            czyZlaKarta = 1
+                        } else {
+                            czyZlaKarta = 0
+                        }
                     } else {
                         czyZlaKarta = 0
                     }
@@ -815,6 +821,7 @@ function doRozdajKarty (ileGraczy: number) {
     reka2.unshift(52)
     reka2.unshift(53)
     reka2.unshift(0)
+    reka2.unshift(1)
 }
 function doMoveRight () {
     for (let index310 = 0; index310 <= sprites.allOfKind(SpriteKind.Player).length - 1; index310++) {
