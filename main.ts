@@ -623,11 +623,7 @@ function doWyswietlGracza (numerGracza: number) {
     if (IlePauzy > 0) {
         textSprite2.setText("Pauzy: ")
         textSprite3.setText(convertToText(IlePauzy))
-    } else {
-        textSprite2.setText("")
-        textSprite3.setText("")
-    }
-    if (IleDobranych > 0) {
+    } else if (IleDobranych > 0) {
         textSprite2.setText("Dobierz: ")
         textSprite3.setText(convertToText(IleDobranych))
     } else {
