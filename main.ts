@@ -697,28 +697,28 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 function doWyswietlGracza (numerGracza: number) {
     if (numerGracza == 1) {
-        gracz1.setImage(assets.image`cat1`)
+        gracz1.setImage(assets.image`grzyb`)
         textGracz1.setText("Player1")
         if (IlePauzy1 > 0) {
             textSprite2.setText("Pauzujesz: ")
             textSprite3.setText(convertToText(IlePauzy1))
         }
     } else if (numerGracza == 2) {
-        gracz1.setImage(assets.image`forestMonkey0`)
+        gracz1.setImage(assets.image`drzewo`)
         textGracz1.setText("Player2")
         if (IlePauzy2 > 0) {
             textSprite2.setText("Pauzujesz: ")
             textSprite3.setText(convertToText(IlePauzy2))
         }
     } else if (numerGracza == 3) {
-        gracz1.setImage(assets.image`forestSnake0`)
+        gracz1.setImage(assets.image`dino`)
         textGracz1.setText("Player3")
         if (IlePauzy3 > 0) {
             textSprite2.setText("Pauzujesz: ")
             textSprite3.setText(convertToText(IlePauzy3))
         }
     } else if (numerGracza == 4) {
-        gracz1.setImage(assets.image`duck5`)
+        gracz1.setImage(assets.image`donutek`)
         textGracz1.setText("Player4")
         if (IlePauzy4 > 0) {
             textSprite2.setText("Pauzujesz: ")
@@ -1066,12 +1066,12 @@ assets.animation`selector`,
 50,
 true
 )
-gracz1 = sprites.create(assets.image`cat1`, SpriteKind.Enemy)
-gracz1.setPosition(9, 110)
+gracz1 = sprites.create(assets.image`grzyb`, SpriteKind.Enemy)
+gracz1.setPosition(21, 102)
 textGracz1 = textsprite.create("Player1")
-textGracz1.setPosition(20, 90)
+textGracz1.setPosition(20, 78)
 textGracz2 = textsprite.create("-->", 0, 0)
-textGracz2.setPosition(20, 80)
+textGracz2.setPosition(20, 68)
 KartaNaKupce = 31
 kupka1 = sprites.create(assets.image`4green`, SpriteKind.Enemy)
 kupka1.setPosition(77, 78)
