@@ -293,6 +293,16 @@ function doPauzy () {
         doWyswietlGracza(ktoryGracz)
     }
 }
+function doSprawdzReke () {
+    CzyKolorKupka = 0
+    for (let index555 = 0; index555 <= wyswreka.length - 1; index555++) {
+        if (doJakiKolorKarty(wyswreka[index555]) == doJakiKolorKarty(KartaNaKupce)) {
+            CzyKolorKupka = 1
+            break;
+        }
+    }
+    return CzyKolorKupka
+}
 function doInicjujTalie () {
     for (let index3 = 0; index3 <= talia.length - 1; index3++) {
         talia.pop()
@@ -487,7 +497,17 @@ function doCzyRuchMozliwy (PorKarta: number) {
                 if (doJakiKolorKarty(wyswreka[index210]) != 0) {
                     czyZlaKarta = 1
                 } else {
-                    czyZlaKarta = 0
+                    if (doJakaWartoscKarty(wyswreka[index210]) == 14) {
+                        if (doSprawdzReke() == 1) {
+                            czyZlaKarta = 1
+                        } else if (IleDobranych > 0) {
+                            czyZlaKarta = 1
+                        } else {
+                            czyZlaKarta = 0
+                        }
+                    } else {
+                        czyZlaKarta = 0
+                    }
                 }
             } else if (doJakaWartoscKarty(wyswreka[index210]) != 10 && doJakaWartoscKarty(PorKarta) == 10) {
                 czyZlaKarta = 1
@@ -792,9 +812,9 @@ function doRozdajKarty (ileGraczy: number) {
     reka1.unshift(52)
     reka1.unshift(53)
     reka2.unshift(50)
-    reka2.unshift(51)
     reka2.unshift(52)
     reka2.unshift(53)
+    reka2.unshift(0)
 }
 function doMoveRight () {
     for (let index310 = 0; index310 <= sprites.allOfKind(SpriteKind.Player).length - 1; index310++) {
@@ -960,6 +980,7 @@ function doDobierzKarte (IleKartDobrac: number) {
 let KartaDobrana = 0
 let obrazeKarty: Image = null
 let value32: Sprite = null
+let CzyKolorKupka = 0
 let KoniecPauzy = false
 let komunikat = ""
 let mySprite: Sprite = null
