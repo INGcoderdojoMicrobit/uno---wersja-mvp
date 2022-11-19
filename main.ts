@@ -336,6 +336,10 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
 function doWybierzKolorKartyNaKupce () {
     doWyswietlReke(ktoryGracz)
     game.showLongText("Wybierz kolor strzałkami lewo-prawo i potwierdź B", DialogLayout.Full)
+    textSprite2 = textsprite.create("Wybierz")
+    textSprite2.setPosition(135, 96)
+    textSprite3 = textsprite.create("kolor")
+    textSprite3.setPosition(145, 106)
 }
 function doPauzy () {
     komunikat = "to zły komunikat jest.. gra teraz gracz: " + ktoryGracz + "nazbierane pauzy:" + IlePauzy + "to jest błąd"
