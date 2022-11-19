@@ -755,6 +755,11 @@ function doWyswietlGracza (numerGracza: number) {
         textSprite2.setText("")
         textSprite3.setText("")
     }
+    if (kierunek == 1) {
+        textGracz2.setText("-->")
+    } else {
+        textGracz2.setText("<--")
+    }
 }
 // 10 - POSTÓJ
 // 11 - WEŹ 2
@@ -1036,6 +1041,7 @@ let textSprite3: TextSprite = null
 let textSprite2: TextSprite = null
 let kupka1: Sprite = null
 let KartaNaKupce = 0
+let textGracz2: TextSprite = null
 let textGracz1: TextSprite = null
 let gracz1: Sprite = null
 let wybierak: Sprite = null
@@ -1064,6 +1070,8 @@ gracz1 = sprites.create(assets.image`cat1`, SpriteKind.Enemy)
 gracz1.setPosition(9, 110)
 textGracz1 = textsprite.create("Player1")
 textGracz1.setPosition(20, 90)
+textGracz2 = textsprite.create("-->", 0, 0)
+textGracz2.setPosition(20, 80)
 KartaNaKupce = 31
 kupka1 = sprites.create(assets.image`4green`, SpriteKind.Enemy)
 kupka1.setPosition(77, 78)
