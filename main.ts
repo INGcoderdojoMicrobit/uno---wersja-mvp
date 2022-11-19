@@ -31,14 +31,21 @@ function doWykonajRuch () {
                     IlePauzy += 1
                 } else if (doJakaWartoscKarty(wyswreka[index210]) == 11) {
                     IleDobranych += 2
+                } else if (doJakaWartoscKarty(wyswreka[index210]) == 14) {
+                    IleDobranych += 4
                 }
                 KartaNaKupce = wyswreka.removeAt(index210)
             } else {
-                if (doJakiKolorKarty(wyswreka[index210]) == 0) {
+                if (doJakaWartoscKarty(wyswreka[index210]) == 13) {
                     KartaNaKupce = wyswreka.removeAt(index210)
                     czyWybracKolor = 1
+                } else if (doJakaWartoscKarty(wyswreka[index210]) == 14) {
+                    KartaNaKupce = wyswreka.removeAt(index210)
+                    czyWybracKolor = 1
+                    IleDobranych += 4
+                } else {
+                    czyZlaKarta = 1
                 }
-                czyZlaKarta = 1
             }
         }
     }
@@ -52,6 +59,8 @@ function doWykonajRuch () {
                         IlePauzy += 1
                     } else if (doJakaWartoscKarty(wyswreka[index211]) == 11) {
                         IleDobranych += 2
+                    } else if (doJakaWartoscKarty(wyswreka[index211]) == 14) {
+                        IleDobranych += 4
                     }
                     czyZlaKarta = 0
                     KartaNaKupce = wyswreka.removeAt(index211)
@@ -519,6 +528,8 @@ function doCzyRuchMozliwy (PorKarta: number) {
                 czyZlaKarta = 1
             } else if (doJakaWartoscKarty(wyswreka[index210]) != 11 && doJakaWartoscKarty(PorKarta) == 11) {
                 czyZlaKarta = 1
+            } else if (IleDobranych > 0) {
+                czyZlaKarta = 1
             }
         }
     }
@@ -526,7 +537,11 @@ function doCzyRuchMozliwy (PorKarta: number) {
         for (let index211 = 0; index211 <= WybraneKarty.length - 1; index211++) {
             if (WybraneKarty[index211] == 1) {
                 if (doJakaWartoscKarty(wyswreka[index211]) == doJakaWartoscKarty(KartaNaKupce)) {
-                    czyZlaKarta = 0
+                    if (IleDobranych > 0 && doJakaWartoscKarty(wyswreka[index211]) == 14) {
+                        czyZlaKarta = 1
+                    } else {
+                        czyZlaKarta = 0
+                    }
                 }
             }
         }
@@ -813,15 +828,6 @@ function doRozdajKarty (ileGraczy: number) {
             reka4.unshift(talia.removeAt(randint(0, talia.length - 1)))
         }
     }
-    reka1.unshift(50)
-    reka1.unshift(51)
-    reka1.unshift(52)
-    reka1.unshift(53)
-    reka2.unshift(50)
-    reka2.unshift(52)
-    reka2.unshift(53)
-    reka2.unshift(0)
-    reka2.unshift(1)
 }
 function doMoveRight () {
     for (let index310 = 0; index310 <= sprites.allOfKind(SpriteKind.Player).length - 1; index310++) {
