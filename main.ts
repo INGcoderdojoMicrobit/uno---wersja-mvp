@@ -84,6 +84,86 @@ function doWykonajRuch () {
         doGraNastepny()
     }
 }
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (czyWybracKolor == 0) {
+        if (IleWybranych > 0) {
+            if (IlePauzy > 0 || IleDobranych > 0) {
+                czyZlaKarta = doCzyRuchMozliwy(KartaNaKupce)
+            } else {
+                czyZlaKarta = doCzyRuchMozliwy(0)
+            }
+            if (czyZlaKarta == 1) {
+                game.showLongText("Nie można tak zagrać", DialogLayout.Full)
+            } else {
+                doWykonajRuch()
+            }
+        } else {
+            if (IlePauzy > 0) {
+                if (ktoryGracz == 1) {
+                    IlePauzy1 += IlePauzy
+                } else if (ktoryGracz == 2) {
+                    IlePauzy2 += IlePauzy
+                } else if (ktoryGracz == 3) {
+                    IlePauzy3 += IlePauzy
+                } else if (ktoryGracz == 4) {
+                    IlePauzy4 += IlePauzy
+                }
+                IlePauzy = 0
+                doPauzy()
+            } else if (IleDobranych > 0) {
+                komunikat = "Dobieram " + IleDobranych + " kart z talii.."
+                game.showLongText(komunikat, DialogLayout.Full)
+                doDobierzKarte(IleDobranych)
+                IleDobranych = 0
+                doWyswietlReke(ktoryGracz)
+                doWyswietlGracza(ktoryGracz)
+                doGraNastepny()
+            } else {
+                mySprite2 = sprites.create(assets.image`blacktlo`, SpriteKind.Text)
+                mySprite2.setPosition(80, 60)
+                pause(100)
+                if (game.ask("    Czy dobrać kartę?")) {
+                    mySprite2.destroy()
+                    doDobierzKarte(1)
+                    doWyswietlReke(ktoryGracz)
+                    if (IleWybranych == 0) {
+                        for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
+                            if (wybierak.x == value4.x) {
+                                value4.startEffect(effects.bubbles, 1000)
+                                value4.y = 32
+                                wybierak.y = 32
+                                WybraneKarty[iterator] = 1
+                                IleWybranych += 1
+                            }
+                        }
+                    }
+                    pause(1000)
+                    czyZlaKarta = doCzyRuchMozliwy(1)
+                    if (czyZlaKarta == 0) {
+                        mySprite2 = sprites.create(assets.image`blacktlo`, SpriteKind.Text)
+                        mySprite2.setPosition(80, 60)
+                        pause(100)
+                        if (game.ask("    Czy zagrać kartą?")) {
+                            mySprite2.destroy()
+                            doWykonajRuch()
+                        } else {
+                            mySprite2.destroy()
+                            doGraNastepny()
+                        }
+                    } else {
+                        game.showLongText("Nie możesz zagrać kartą...", DialogLayout.Full)
+                        doGraNastepny()
+                    }
+                } else {
+                    mySprite2.destroy()
+                }
+            }
+        }
+    } else {
+        czyWybracKolor = 0
+        doGraNastepny()
+    }
+})
 function doGraNastepny () {
     doWyswietlReke(ktoryGracz)
     doWyswietlGracza(ktoryGracz)
@@ -737,73 +817,6 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
-controller.B.onEvent(ControllerButtonEvent.Released, function () {
-    if (czyWybracKolor == 0) {
-        if (IleWybranych > 0) {
-            if (IlePauzy > 0 || IleDobranych > 0) {
-                czyZlaKarta = doCzyRuchMozliwy(KartaNaKupce)
-            } else {
-                czyZlaKarta = doCzyRuchMozliwy(0)
-            }
-            if (czyZlaKarta == 1) {
-                game.showLongText("Nie można tak zagrać", DialogLayout.Full)
-            } else {
-                doWykonajRuch()
-            }
-        } else {
-            if (IlePauzy > 0) {
-                if (ktoryGracz == 1) {
-                    IlePauzy1 += IlePauzy
-                } else if (ktoryGracz == 2) {
-                    IlePauzy2 += IlePauzy
-                } else if (ktoryGracz == 3) {
-                    IlePauzy3 += IlePauzy
-                } else if (ktoryGracz == 4) {
-                    IlePauzy4 += IlePauzy
-                }
-                IlePauzy = 0
-                doPauzy()
-            } else if (IleDobranych > 0) {
-                komunikat = "Dobieram " + IleDobranych + " kart z talii.."
-                game.showLongText(komunikat, DialogLayout.Full)
-                doDobierzKarte(IleDobranych)
-                IleDobranych = 0
-                doWyswietlReke(ktoryGracz)
-                doWyswietlGracza(ktoryGracz)
-                doGraNastepny()
-            } else {
-                if (game.ask("    Czy dobrać kartę?")) {
-                    doDobierzKarte(1)
-                    doWyswietlReke(ktoryGracz)
-                    if (IleWybranych == 0) {
-                        for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
-                            if (wybierak.x == value4.x) {
-                                value4.startEffect(effects.bubbles, 1000)
-                                value4.y = 32
-                                wybierak.y = 32
-                                WybraneKarty[iterator] = 1
-                                IleWybranych += 1
-                            }
-                        }
-                    }
-                    pause(1000)
-                    czyZlaKarta = doCzyRuchMozliwy(1)
-                    if (czyZlaKarta == 0) {
-                        if (game.ask("    Czy zagrać kartą?")) {
-                            doWykonajRuch()
-                        }
-                    } else {
-                        game.showLongText("Nie możesz zagrać kartą...", DialogLayout.Full)
-                        doGraNastepny()
-                    }
-                }
-            }
-        }
-    } else {
-        czyWybracKolor = 0
-        doGraNastepny()
-    }
-})
 function doRozdajKarty (ileGraczy: number) {
     for (let index572 = 0; index572 <= reka1.length - 1; index572++) {
         reka1.pop()
@@ -995,10 +1008,11 @@ let obrazeKarty: Image = null
 let value32: Sprite = null
 let CzyKolorKupka = 0
 let KoniecPauzy = false
-let komunikat = ""
 let mySprite: Sprite = null
 let kartalosowana = 0
 let koniecPetli = 0
+let mySprite2: Sprite = null
+let komunikat = ""
 let czyZlaKarta = 0
 let reka4: number[] = []
 let reka3: number[] = []
