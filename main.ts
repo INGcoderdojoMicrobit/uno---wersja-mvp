@@ -760,6 +760,34 @@ function doWyswietlGracza (numerGracza: number) {
     } else {
         textGracz2.setText("<--")
     }
+    if (U1 == 2) {
+        textSprite5.setOutline(1, 2)
+    } else if (U1 == 1) {
+        textSprite5.setOutline(1, 15)
+    } else {
+        textSprite5.setText("")
+    }
+    if (U2 == 2) {
+        textSprite6.setOutline(1, 2)
+    } else if (U2 == 1) {
+        textSprite6.setOutline(1, 15)
+    } else {
+        textSprite6.setText("")
+    }
+    if (U3 == 2) {
+        textSprite7.setOutline(1, 2)
+    } else if (U3 == 1) {
+        textSprite7.setOutline(1, 15)
+    } else {
+        textSprite7.setText("")
+    }
+    if (U4 == 2) {
+        textSprite8.setOutline(1, 2)
+    } else if (U4 == 1) {
+        textSprite8.setOutline(1, 15)
+    } else {
+        textSprite8.setText("")
+    }
 }
 // 10 - POSTÓJ
 // 11 - WEŹ 2
@@ -838,6 +866,12 @@ function doPierwszaKarta () {
     }
     return pierwszaKarta
 }
+controller.A.onEvent(ControllerButtonEvent.Repeated, function () {
+    let UNO = 0
+    if (UNO == 1) {
+        game.showLongText("UNO! UNO! UNO!", DialogLayout.Bottom)
+    }
+})
 function doRozdajKarty (ileGraczy: number) {
     for (let index572 = 0; index572 <= reka1.length - 1; index572++) {
         reka1.pop()
@@ -1052,6 +1086,10 @@ let IlePauzy1 = 0
 let IlePauzy = 0
 let kierunek = 0
 let ktoryGracz = 0
+let textSprite8: TextSprite = null
+let textSprite7: TextSprite = null
+let textSprite6: TextSprite = null
+let textSprite5: TextSprite = null
 let textSprite3: TextSprite = null
 let textSprite2: TextSprite = null
 let textGracz2: TextSprite = null
@@ -1064,6 +1102,14 @@ let IleDobranych = 0
 let iterator = 0
 let WybraneKarty: number[] = []
 let talia: number[] = []
+let U4 = 0
+let U3 = 0
+let U2 = 0
+let U1 = 0
+U1 = 1
+U2 = 0
+U3 = 1
+U4 = 2
 talia = []
 WybraneKarty = []
 iterator = 0
@@ -1089,6 +1135,16 @@ textSprite2 = textsprite.create("dobierz:")
 textSprite2.setPosition(135, 96)
 textSprite3 = textsprite.create("6")
 textSprite3.setPosition(145, 106)
+let textSprite4 = textsprite.create("UNO")
+textSprite4.setPosition(104, 68)
+textSprite5 = textsprite.create("1", 0, 1)
+textSprite5.setPosition(120, 68)
+textSprite6 = textsprite.create("2", 0, 1)
+textSprite6.setPosition(130, 68)
+textSprite7 = textsprite.create("3", 0, 1)
+textSprite7.setPosition(140, 68)
+textSprite8 = textsprite.create("4", 0, 1)
+textSprite8.setPosition(152, 68)
 ktoryGracz = 1
 kierunek = 1
 IlePauzy = 0
