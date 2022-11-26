@@ -826,6 +826,18 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+function doPierwszaKarta () {
+    koniecPetli = 0
+    while (koniecPetli == 0) {
+        pierwszaKarta = talia.removeAt(randint(0, talia.length - 1))
+        if (doJakaWartoscKarty(pierwszaKarta) >= 0 && doJakaWartoscKarty(pierwszaKarta) <= 9) {
+            koniecPetli = 1
+        } else {
+            talia.unshift(pierwszaKarta)
+        }
+    }
+    return pierwszaKarta
+}
 function doRozdajKarty (ileGraczy: number) {
     for (let index572 = 0; index572 <= reka1.length - 1; index572++) {
         reka1.pop()
@@ -1015,6 +1027,7 @@ function doDobierzKarte (IleKartDobrac: number) {
 let KartaDobrana = 0
 let obrazeKarty: Image = null
 let value32: Sprite = null
+let pierwszaKarta = 0
 let CzyKolorKupka = 0
 let KoniecPauzy = false
 let mySprite: Sprite = null
@@ -1029,6 +1042,8 @@ let reka2: number[] = []
 let reka1: number[] = []
 let wyswreka: number[] = []
 let czyWybracKolor = 0
+let kupka1: Sprite = null
+let KartaNaKupce = 0
 let IluGraczy = 0
 let IlePauzy4 = 0
 let IlePauzy3 = 0
@@ -1039,8 +1054,6 @@ let kierunek = 0
 let ktoryGracz = 0
 let textSprite3: TextSprite = null
 let textSprite2: TextSprite = null
-let kupka1: Sprite = null
-let KartaNaKupce = 0
 let textGracz2: TextSprite = null
 let textGracz1: TextSprite = null
 let gracz1: Sprite = null
@@ -1072,9 +1085,6 @@ textGracz1 = textsprite.create("Player1")
 textGracz1.setPosition(20, 78)
 textGracz2 = textsprite.create("-->", 0, 0)
 textGracz2.setPosition(20, 68)
-KartaNaKupce = 31
-kupka1 = sprites.create(assets.image`4green`, SpriteKind.Enemy)
-kupka1.setPosition(77, 78)
 textSprite2 = textsprite.create("dobierz:")
 textSprite2.setPosition(135, 96)
 textSprite3 = textsprite.create("6")
@@ -1088,6 +1098,9 @@ IlePauzy3 = 0
 IlePauzy4 = 0
 IluGraczy = 4
 doRozdajKarty(4)
+KartaNaKupce = doPierwszaKarta()
+kupka1 = sprites.create(doDajObrazek(KartaNaKupce), SpriteKind.Enemy)
+kupka1.setPosition(77, 78)
 doWyswietlReke(ktoryGracz)
 doWyswietlGracza(ktoryGracz)
 game.setDialogFrame(assets.image`bialetlo`)
