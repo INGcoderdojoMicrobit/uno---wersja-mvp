@@ -788,6 +788,11 @@ function doWyswietlGracza (numerGracza: number) {
     } else {
         textSprite8.setText("")
     }
+    if (U1 != 0 || (U2 != 0 || U3 != 0) || U4 != 0) {
+        textSprite4.setText("UNO")
+    } else {
+        textSprite4.setText("")
+    }
 }
 // 10 - POSTÓJ
 // 11 - WEŹ 2
@@ -867,9 +872,10 @@ function doPierwszaKarta () {
     return pierwszaKarta
 }
 controller.A.onEvent(ControllerButtonEvent.Repeated, function () {
-    let UNO = 0
-    if (UNO == 1) {
-        game.showLongText("UNO! UNO! UNO!", DialogLayout.Bottom)
+    if (U1 == 1 && ktoryGracz == 1) {
+        game.showLongText("Gracz 1 krzyczy UNO!", DialogLayout.Full)
+        U1 = 2
+        textSprite5.setOutline(1, 2)
     }
 })
 function doRozdajKarty (ileGraczy: number) {
@@ -1090,6 +1096,7 @@ let textSprite8: TextSprite = null
 let textSprite7: TextSprite = null
 let textSprite6: TextSprite = null
 let textSprite5: TextSprite = null
+let textSprite4: TextSprite = null
 let textSprite3: TextSprite = null
 let textSprite2: TextSprite = null
 let textGracz2: TextSprite = null
@@ -1107,9 +1114,9 @@ let U3 = 0
 let U2 = 0
 let U1 = 0
 U1 = 1
-U2 = 0
-U3 = 1
-U4 = 2
+U2 = 1
+U3 = 2
+U4 = 1
 talia = []
 WybraneKarty = []
 iterator = 0
@@ -1135,16 +1142,16 @@ textSprite2 = textsprite.create("dobierz:")
 textSprite2.setPosition(135, 96)
 textSprite3 = textsprite.create("6")
 textSprite3.setPosition(145, 106)
-let textSprite4 = textsprite.create("UNO")
-textSprite4.setPosition(104, 68)
-textSprite5 = textsprite.create("1", 0, 1)
-textSprite5.setPosition(120, 68)
+textSprite4 = textsprite.create("UNO")
+textSprite4.setPosition(105, 68)
+textSprite5 = textsprite.create("1")
+textSprite5.setPosition(120, 67)
 textSprite6 = textsprite.create("2", 0, 1)
-textSprite6.setPosition(130, 68)
+textSprite6.setPosition(130, 67)
 textSprite7 = textsprite.create("3", 0, 1)
-textSprite7.setPosition(140, 68)
+textSprite7.setPosition(140, 67)
 textSprite8 = textsprite.create("4", 0, 1)
-textSprite8.setPosition(152, 68)
+textSprite8.setPosition(152, 67)
 ktoryGracz = 1
 kierunek = 1
 IlePauzy = 0
