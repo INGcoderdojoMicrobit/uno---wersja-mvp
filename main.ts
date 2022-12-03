@@ -82,6 +82,7 @@ function doWykonajRuch () {
     if (czyWybracKolor == 1) {
         doWybierzKolorKartyNaKupce()
     } else {
+        pause(10000)
         doGraNastepny()
     }
 }
@@ -172,6 +173,7 @@ function doGraNastepny () {
     doWyswietlGracza(ktoryGracz)
     wybierak.y = 16
     IleWybranych = 0
+    doCzyKoniecGry()
     pause(1000)
     sprites.destroyAllSpritesOfKind(SpriteKind.Player, effects.disintegrate, 500)
     pause(1000)
@@ -343,6 +345,24 @@ function doWybierzKolorKartyNaKupce () {
     textSprite2.setPosition(135, 96)
     textSprite3 = textsprite.create("kolor")
     textSprite3.setPosition(145, 106)
+}
+function doCzyKoniecGry () {
+    if (ktoryGracz == 1 && reka1.length == 0) {
+        game.showLongText("Gracz 1 wygrywa!", DialogLayout.Full)
+        game.over(true, effects.blizzard)
+    }
+    if (ktoryGracz == 2 && reka2.length == 0) {
+        game.showLongText("Gracz 2 wygrywa!", DialogLayout.Full)
+        game.over(true, effects.blizzard)
+    }
+    if (ktoryGracz == 3 && reka3.length == 0) {
+        game.showLongText("Gracz 3 wygrywa!", DialogLayout.Full)
+        game.over(true, effects.blizzard)
+    }
+    if (ktoryGracz == 4 && reka4.length == 0) {
+        game.showLongText("Gracz 4 wygrywa!", DialogLayout.Full)
+        game.over(true, effects.blizzard)
+    }
 }
 function doPauzy () {
     komunikat = "to zły komunikat jest.. gra teraz gracz: " + ktoryGracz + "nazbierane pauzy:" + IlePauzy + "to jest błąd"
@@ -881,6 +901,22 @@ function doUstawFlagiUNO (NumerGracza: number) {
     if (NumerGracza == 4 && reka4.length != 1) {
         U4 = 0
     }
+    if (NumerGracza == 1 && reka1.length == 1) {
+        U1 = 1
+        doWyswietlGracza(ktoryGracz)
+    }
+    if (NumerGracza == 2 && reka2.length == 1) {
+        U2 = 1
+        doWyswietlGracza(ktoryGracz)
+    }
+    if (NumerGracza == 3 && reka3.length == 1) {
+        U3 = 1
+        doWyswietlGracza(ktoryGracz)
+    }
+    if (NumerGracza == 4 && reka4.length == 1) {
+        U4 = 1
+        doWyswietlGracza(ktoryGracz)
+    }
 }
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     if (IleWybranych == 0) {
@@ -1003,16 +1039,14 @@ function doRozdajKarty (ileGraczy: number) {
         reka4.pop()
     }
     doInicjujTalie()
-    for (let index61 = 0; index61 <= 8; index61++) {
-        reka1.unshift(talia.removeAt(randint(0, talia.length - 1)))
-        reka2.unshift(talia.removeAt(randint(0, talia.length - 1)))
-        if (ileGraczy > 2) {
-            reka3.unshift(talia.removeAt(randint(0, talia.length - 1)))
-        }
-        if (ileGraczy > 3) {
-            reka4.unshift(talia.removeAt(randint(0, talia.length - 1)))
-        }
-    }
+    reka1.unshift(1)
+    reka1.unshift(1)
+    reka2.unshift(1)
+    reka2.unshift(1)
+    reka3.unshift(1)
+    reka3.unshift(1)
+    reka4.unshift(1)
+    reka4.unshift(1)
 }
 function doMoveRight () {
     for (let index310 = 0; index310 <= sprites.allOfKind(SpriteKind.Player).length - 1; index310++) {
@@ -1224,10 +1258,10 @@ let U4 = 0
 let U3 = 0
 let U2 = 0
 let U1 = 0
-U1 = 1
-U2 = 1
-U3 = 2
-U4 = 1
+U1 = 0
+U2 = 0
+U3 = 0
+U4 = 0
 talia = []
 WybraneKarty = []
 iterator = 0
