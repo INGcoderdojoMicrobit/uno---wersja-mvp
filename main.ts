@@ -1,10 +1,12 @@
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    for (let value of sprites.allOfKind(SpriteKind.Player)) {
-        if (wybierak.x == value.x) {
-            value.y = 16
-            wybierak.y = 16
-            WybraneKarty[iterator] = 0
-            IleWybranych += -1
+    if (Locked == 0) {
+        for (let value of sprites.allOfKind(SpriteKind.Player)) {
+            if (wybierak.x == value.x) {
+                value.y = 16
+                wybierak.y = 16
+                WybraneKarty[iterator] = 0
+                IleWybranych += -1
+            }
         }
     }
 })
@@ -86,88 +88,90 @@ function doWykonajRuch () {
     }
 }
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (czyWybracKolor == 0) {
-        if (IleWybranych > 0) {
-            if (IlePauzy > 0 || IleDobranych > 0) {
-                czyZlaKarta = doCzyRuchMozliwy(KartaNaKupce)
-            } else {
-                czyZlaKarta = doCzyRuchMozliwy(0)
-            }
-            if (czyZlaKarta == 1) {
-                game.showLongText("Nie można tak zagrać", DialogLayout.Full)
-            } else {
-                doWykonajRuch()
-            }
-        } else {
-            if (IlePauzy > 0) {
-                if (ktoryGracz == 1) {
-                    IlePauzy1 += IlePauzy
-                } else if (ktoryGracz == 2) {
-                    IlePauzy2 += IlePauzy
-                } else if (ktoryGracz == 3) {
-                    IlePauzy3 += IlePauzy
-                } else if (ktoryGracz == 4) {
-                    IlePauzy4 += IlePauzy
+    if (Locked == 0) {
+        if (czyWybracKolor == 0) {
+            if (IleWybranych > 0) {
+                if (IlePauzy > 0 || IleDobranych > 0) {
+                    czyZlaKarta = doCzyRuchMozliwy(KartaNaKupce)
+                } else {
+                    czyZlaKarta = doCzyRuchMozliwy(0)
                 }
-                IlePauzy = 0
-                doPauzy()
-            } else if (IleDobranych > 0) {
-                komunikat = "Dobieram " + IleDobranych + " kart z talii.."
-                game.showLongText(komunikat, DialogLayout.Full)
-                doDobierzKarte(IleDobranych)
-                doUstawFlagiUNO(ktoryGracz)
-                IleDobranych = 0
-                doWyswietlReke(ktoryGracz)
-                doWyswietlGracza(ktoryGracz)
-                doGraNastepny()
+                if (czyZlaKarta == 1) {
+                    game.showLongText("Nie można tak zagrać", DialogLayout.Full)
+                } else {
+                    doWykonajRuch()
+                }
             } else {
-                mySprite2 = sprites.create(assets.image`blacktlo`, SpriteKind.Text)
-                mySprite2.setPosition(80, 60)
-                pause(100)
-                if (game.ask("    Czy dobrać kartę?")) {
-                    mySprite2.destroy()
-                    doDobierzKarte(1)
+                if (IlePauzy > 0) {
+                    if (ktoryGracz == 1) {
+                        IlePauzy1 += IlePauzy
+                    } else if (ktoryGracz == 2) {
+                        IlePauzy2 += IlePauzy
+                    } else if (ktoryGracz == 3) {
+                        IlePauzy3 += IlePauzy
+                    } else if (ktoryGracz == 4) {
+                        IlePauzy4 += IlePauzy
+                    }
+                    IlePauzy = 0
+                    doPauzy()
+                } else if (IleDobranych > 0) {
+                    komunikat = "Dobieram " + IleDobranych + " kart z talii.."
+                    game.showLongText(komunikat, DialogLayout.Full)
+                    doDobierzKarte(IleDobranych)
                     doUstawFlagiUNO(ktoryGracz)
+                    IleDobranych = 0
                     doWyswietlReke(ktoryGracz)
-                    if (IleWybranych == 0) {
-                        for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
-                            if (wybierak.x == value4.x) {
-                                value4.startEffect(effects.bubbles, 1000)
-                                value4.y = 32
-                                wybierak.y = 32
-                                WybraneKarty[iterator] = 1
-                                IleWybranych += 1
+                    doWyswietlGracza(ktoryGracz)
+                    doGraNastepny()
+                } else {
+                    mySprite2 = sprites.create(assets.image`blacktlo`, SpriteKind.Text)
+                    mySprite2.setPosition(80, 60)
+                    pause(100)
+                    if (game.ask("    Czy dobrać kartę?")) {
+                        mySprite2.destroy()
+                        doDobierzKarte(1)
+                        doUstawFlagiUNO(ktoryGracz)
+                        doWyswietlReke(ktoryGracz)
+                        if (IleWybranych == 0) {
+                            for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
+                                if (wybierak.x == value4.x) {
+                                    value4.startEffect(effects.bubbles, 1000)
+                                    value4.y = 32
+                                    wybierak.y = 32
+                                    WybraneKarty[iterator] = 1
+                                    IleWybranych += 1
+                                }
                             }
                         }
-                    }
-                    pause(1000)
-                    czyZlaKarta = doCzyRuchMozliwy(1)
-                    if (czyZlaKarta == 0) {
-                        mySprite2 = sprites.create(assets.image`blacktlo`, SpriteKind.Text)
-                        mySprite2.setPosition(80, 60)
-                        pause(100)
-                        if (game.ask("    Czy zagrać kartą?")) {
-                            mySprite2.destroy()
-                            doWykonajRuch()
+                        pause(1000)
+                        czyZlaKarta = doCzyRuchMozliwy(1)
+                        if (czyZlaKarta == 0) {
+                            mySprite2 = sprites.create(assets.image`blacktlo`, SpriteKind.Text)
+                            mySprite2.setPosition(80, 60)
+                            pause(100)
+                            if (game.ask("    Czy zagrać kartą?")) {
+                                mySprite2.destroy()
+                                doWykonajRuch()
+                            } else {
+                                mySprite2.destroy()
+                                doGraNastepny()
+                            }
                         } else {
-                            mySprite2.destroy()
+                            game.showLongText("Nie możesz zagrać kartą...", DialogLayout.Full)
                             doGraNastepny()
                         }
                     } else {
-                        game.showLongText("Nie możesz zagrać kartą...", DialogLayout.Full)
-                        doGraNastepny()
+                        mySprite2.destroy()
                     }
-                } else {
-                    mySprite2.destroy()
                 }
             }
-        }
-    } else {
-        if (KartaNaKupce != 0 && KartaNaKupce != 1) {
-            czyWybracKolor = 0
-            doGraNastepny()
         } else {
-            game.showLongText("Musisz wybrać kolor!", DialogLayout.Full)
+            if (KartaNaKupce != 0 && KartaNaKupce != 1) {
+                czyWybracKolor = 0
+                doGraNastepny()
+            } else {
+                game.showLongText("Musisz wybrać kolor!", DialogLayout.Full)
+            }
         }
     }
 })
@@ -305,56 +309,58 @@ function doJakiKolorKarty (karta: number) {
     return 0
 }
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (czyWybracKolor == 0) {
-        if (ktoryGracz == 1) {
-            wyswreka = reka1
-        } else if (ktoryGracz == 2) {
-            wyswreka = reka2
-        } else if (ktoryGracz == 3) {
-            wyswreka = reka3
-        } else if (ktoryGracz == 4) {
-            wyswreka = reka4
-        } else {
-            wyswreka = talia
-        }
-        if (gdziewybierak > 0) {
-            gdziewybierak += -1
-            iterator += -1
-        }
-        for (let value2 of sprites.allOfKind(SpriteKind.Player)) {
-            if (value2.x < 0 && gdziewybierak == 0) {
-                iterator += -1
-                doMoveRight()
+    if (Locked == 0) {
+        if (czyWybracKolor == 0) {
+            if (ktoryGracz == 1) {
+                wyswreka = reka1
+            } else if (ktoryGracz == 2) {
+                wyswreka = reka2
+            } else if (ktoryGracz == 3) {
+                wyswreka = reka3
+            } else if (ktoryGracz == 4) {
+                wyswreka = reka4
+            } else {
+                wyswreka = talia
             }
-        }
-        if (WybraneKarty[iterator] == 0) {
-            wybierak.setPosition(8 + gdziewybierak * 18, 16)
+            if (gdziewybierak > 0) {
+                gdziewybierak += -1
+                iterator += -1
+            }
+            for (let value2 of sprites.allOfKind(SpriteKind.Player)) {
+                if (value2.x < 0 && gdziewybierak == 0) {
+                    iterator += -1
+                    doMoveRight()
+                }
+            }
+            if (WybraneKarty[iterator] == 0) {
+                wybierak.setPosition(8 + gdziewybierak * 18, 16)
+            } else {
+                wybierak.setPosition(8 + gdziewybierak * 18, 32)
+            }
         } else {
-            wybierak.setPosition(8 + gdziewybierak * 18, 32)
+            if (KartaNaKupce == 0) {
+                KartaNaKupce = 58
+            } else if (KartaNaKupce == 55) {
+                KartaNaKupce = 58
+            } else if (KartaNaKupce == 56) {
+                KartaNaKupce = 55
+            } else if (KartaNaKupce == 57) {
+                KartaNaKupce = 56
+            } else if (KartaNaKupce == 58) {
+                KartaNaKupce = 57
+            } else if (KartaNaKupce == 1) {
+                KartaNaKupce = 62
+            } else if (KartaNaKupce == 59) {
+                KartaNaKupce = 62
+            } else if (KartaNaKupce == 60) {
+                KartaNaKupce = 59
+            } else if (KartaNaKupce == 61) {
+                KartaNaKupce = 60
+            } else if (KartaNaKupce == 62) {
+                KartaNaKupce = 61
+            }
+            kupka1.setImage(doDajObrazek(KartaNaKupce))
         }
-    } else {
-        if (KartaNaKupce == 0) {
-            KartaNaKupce = 58
-        } else if (KartaNaKupce == 55) {
-            KartaNaKupce = 58
-        } else if (KartaNaKupce == 56) {
-            KartaNaKupce = 55
-        } else if (KartaNaKupce == 57) {
-            KartaNaKupce = 56
-        } else if (KartaNaKupce == 58) {
-            KartaNaKupce = 57
-        } else if (KartaNaKupce == 1) {
-            KartaNaKupce = 62
-        } else if (KartaNaKupce == 59) {
-            KartaNaKupce = 62
-        } else if (KartaNaKupce == 60) {
-            KartaNaKupce = 59
-        } else if (KartaNaKupce == 61) {
-            KartaNaKupce = 60
-        } else if (KartaNaKupce == 62) {
-            KartaNaKupce = 61
-        }
-        kupka1.setImage(doDajObrazek(KartaNaKupce))
     }
 })
 function doWybierzKolorKartyNaKupce () {
@@ -675,66 +681,68 @@ function doCzyRuchMozliwy (PorKarta: number) {
     return czyZlaKarta
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (ktoryGracz == 1) {
-        wyswreka = reka1
-    } else if (ktoryGracz == 2) {
-        wyswreka = reka2
-    } else if (ktoryGracz == 3) {
-        wyswreka = reka3
-    } else if (ktoryGracz == 4) {
-        wyswreka = reka4
-    } else {
-        wyswreka = talia
-    }
-    if (czyWybracKolor == 0) {
-        if (gdziewybierak < 8) {
-            if (gdziewybierak < wyswreka.length - 1) {
-                gdziewybierak += 1
-                iterator += 1
-                wybierak.setPosition(8 + gdziewybierak * 18, 16)
-            }
+    if (Locked == 0) {
+        if (ktoryGracz == 1) {
+            wyswreka = reka1
+        } else if (ktoryGracz == 2) {
+            wyswreka = reka2
+        } else if (ktoryGracz == 3) {
+            wyswreka = reka3
+        } else if (ktoryGracz == 4) {
+            wyswreka = reka4
+        } else {
+            wyswreka = talia
         }
-        for (let value22 of sprites.allOfKind(SpriteKind.Player)) {
-            if (value22.x > scene.screenWidth() && gdziewybierak == 8) {
-                iterator += 1
-                for (let value3 of sprites.allOfKind(SpriteKind.Player)) {
-                    for (let index59 = 0; index59 <= 5; index59++) {
-                        value3.x += 3 * -1
-                        if (value3.x >= 0 && value3.x <= scene.screenWidth()) {
-                            pause(10)
+        if (czyWybracKolor == 0) {
+            if (gdziewybierak < 8) {
+                if (gdziewybierak < wyswreka.length - 1) {
+                    gdziewybierak += 1
+                    iterator += 1
+                    wybierak.setPosition(8 + gdziewybierak * 18, 16)
+                }
+            }
+            for (let value22 of sprites.allOfKind(SpriteKind.Player)) {
+                if (value22.x > scene.screenWidth() && gdziewybierak == 8) {
+                    iterator += 1
+                    for (let value3 of sprites.allOfKind(SpriteKind.Player)) {
+                        for (let index59 = 0; index59 <= 5; index59++) {
+                            value3.x += 3 * -1
+                            if (value3.x >= 0 && value3.x <= scene.screenWidth()) {
+                                pause(10)
+                            }
                         }
                     }
                 }
             }
-        }
-        if (WybraneKarty[iterator] == 0) {
-            wybierak.setPosition(8 + gdziewybierak * 18, 16)
+            if (WybraneKarty[iterator] == 0) {
+                wybierak.setPosition(8 + gdziewybierak * 18, 16)
+            } else {
+                wybierak.setPosition(8 + gdziewybierak * 18, 32)
+            }
         } else {
-            wybierak.setPosition(8 + gdziewybierak * 18, 32)
+            if (KartaNaKupce == 0) {
+                KartaNaKupce = 55
+            } else if (KartaNaKupce == 55) {
+                KartaNaKupce = 56
+            } else if (KartaNaKupce == 56) {
+                KartaNaKupce = 57
+            } else if (KartaNaKupce == 57) {
+                KartaNaKupce = 58
+            } else if (KartaNaKupce == 58) {
+                KartaNaKupce = 55
+            } else if (KartaNaKupce == 1) {
+                KartaNaKupce = 59
+            } else if (KartaNaKupce == 59) {
+                KartaNaKupce = 60
+            } else if (KartaNaKupce == 60) {
+                KartaNaKupce = 61
+            } else if (KartaNaKupce == 61) {
+                KartaNaKupce = 62
+            } else if (KartaNaKupce == 62) {
+                KartaNaKupce = 59
+            }
+            kupka1.setImage(doDajObrazek(KartaNaKupce))
         }
-    } else {
-        if (KartaNaKupce == 0) {
-            KartaNaKupce = 55
-        } else if (KartaNaKupce == 55) {
-            KartaNaKupce = 56
-        } else if (KartaNaKupce == 56) {
-            KartaNaKupce = 57
-        } else if (KartaNaKupce == 57) {
-            KartaNaKupce = 58
-        } else if (KartaNaKupce == 58) {
-            KartaNaKupce = 55
-        } else if (KartaNaKupce == 1) {
-            KartaNaKupce = 59
-        } else if (KartaNaKupce == 59) {
-            KartaNaKupce = 60
-        } else if (KartaNaKupce == 60) {
-            KartaNaKupce = 61
-        } else if (KartaNaKupce == 61) {
-            KartaNaKupce = 62
-        } else if (KartaNaKupce == 62) {
-            KartaNaKupce = 59
-        }
-        kupka1.setImage(doDajObrazek(KartaNaKupce))
     }
 })
 function doWyswietlGracza (numerGracza: number) {
@@ -946,13 +954,15 @@ function doUstawFlagiUNO (NumerGracza: number) {
     }
 }
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (IleWybranych == 0) {
-        for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
-            if (wybierak.x == value4.x) {
-                value4.y = 32
-                wybierak.y = 32
-                WybraneKarty[iterator] = 1
-                IleWybranych += 1
+    if (Locked == 0) {
+        if (IleWybranych == 0) {
+            for (let value4 of sprites.allOfKind(SpriteKind.Player)) {
+                if (wybierak.x == value4.x) {
+                    value4.y = 32
+                    wybierak.y = 32
+                    WybraneKarty[iterator] = 1
+                    IleWybranych += 1
+                }
             }
         }
     }
@@ -970,86 +980,88 @@ function doPierwszaKarta () {
     return pierwszaKarta
 }
 controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (CzekamyNaUno == 1) {
-        mySprite3.setImage(assets.image`blacktloUNO`)
-        if (U1 == 1 && ktoryGracz == 1) {
-            U1 = 2
-            textSprite5.setOutline(1, 2)
+    if (Locked == 0) {
+        if (CzekamyNaUno == 1) {
+            mySprite3.setImage(assets.image`blacktloUNO`)
+            if (U1 == 1 && ktoryGracz == 1) {
+                U1 = 2
+                textSprite5.setOutline(1, 2)
+            }
+            if (U2 == 1 && ktoryGracz == 2) {
+                U2 = 2
+                textSprite6.setOutline(1, 2)
+            }
+            if (U3 == 1 && ktoryGracz == 3) {
+                U3 = 2
+                textSprite7.setOutline(1, 2)
+            }
+            if (U4 == 1 && ktoryGracz == 4) {
+                U4 = 2
+                textSprite8.setOutline(1, 2)
+            }
+        } else {
+            if ((U2 == 1 || (U3 == 1 || U4 == 1)) && ktoryGracz == 1) {
+                game.showLongText("Gracz 1 krzyczy UNO dla innych!", DialogLayout.Full)
+                if (U2 == 1) {
+                    doDobierzKarteDlaGracza(2, 2)
+                    doUstawFlagiUNO(2)
+                }
+                if (U3 == 1) {
+                    doDobierzKarteDlaGracza(2, 3)
+                    doUstawFlagiUNO(3)
+                }
+                if (U4 == 1) {
+                    doDobierzKarteDlaGracza(2, 4)
+                    doUstawFlagiUNO(4)
+                }
+            }
+            if ((U1 == 1 || (U3 == 1 || U4 == 1)) && ktoryGracz == 2) {
+                game.showLongText("Gracz 2 krzyczy UNO dla innych!", DialogLayout.Full)
+                if (U1 == 1) {
+                    doDobierzKarteDlaGracza(2, 1)
+                    doUstawFlagiUNO(1)
+                }
+                if (U3 == 1) {
+                    doDobierzKarteDlaGracza(2, 3)
+                    doUstawFlagiUNO(3)
+                }
+                if (U4 == 1) {
+                    doDobierzKarteDlaGracza(2, 4)
+                    doUstawFlagiUNO(4)
+                }
+            }
+            if ((U1 == 1 || (U2 == 1 || U4 == 1)) && ktoryGracz == 3) {
+                game.showLongText("Gracz 3 krzyczy UNO dla innych!", DialogLayout.Full)
+                if (U1 == 1) {
+                    doDobierzKarteDlaGracza(2, 1)
+                    doUstawFlagiUNO(1)
+                }
+                if (U2 == 1) {
+                    doDobierzKarteDlaGracza(2, 2)
+                    doUstawFlagiUNO(2)
+                }
+                if (U4 == 1) {
+                    doDobierzKarteDlaGracza(2, 4)
+                    doUstawFlagiUNO(4)
+                }
+            }
+            if ((U1 == 1 || (U2 == 1 || U3 == 1)) && ktoryGracz == 4) {
+                game.showLongText("Gracz 4 krzyczy UNO dla innych!", DialogLayout.Full)
+                if (U1 == 1) {
+                    doDobierzKarteDlaGracza(2, 1)
+                    doUstawFlagiUNO(1)
+                }
+                if (U2 == 1) {
+                    doDobierzKarteDlaGracza(2, 2)
+                    doUstawFlagiUNO(2)
+                }
+                if (U3 == 1) {
+                    doDobierzKarteDlaGracza(2, 3)
+                    doUstawFlagiUNO(3)
+                }
+            }
+            doWyswietlGracza(ktoryGracz)
         }
-        if (U2 == 1 && ktoryGracz == 2) {
-            U2 = 2
-            textSprite6.setOutline(1, 2)
-        }
-        if (U3 == 1 && ktoryGracz == 3) {
-            U3 = 2
-            textSprite7.setOutline(1, 2)
-        }
-        if (U4 == 1 && ktoryGracz == 4) {
-            U4 = 2
-            textSprite8.setOutline(1, 2)
-        }
-    } else {
-        if ((U2 == 1 || (U3 == 1 || U4 == 1)) && ktoryGracz == 1) {
-            game.showLongText("Gracz 1 krzyczy UNO dla innych!", DialogLayout.Full)
-            if (U2 == 1) {
-                doDobierzKarteDlaGracza(2, 2)
-                doUstawFlagiUNO(2)
-            }
-            if (U3 == 1) {
-                doDobierzKarteDlaGracza(2, 3)
-                doUstawFlagiUNO(3)
-            }
-            if (U4 == 1) {
-                doDobierzKarteDlaGracza(2, 4)
-                doUstawFlagiUNO(4)
-            }
-        }
-        if ((U1 == 1 || (U3 == 1 || U4 == 1)) && ktoryGracz == 2) {
-            game.showLongText("Gracz 2 krzyczy UNO dla innych!", DialogLayout.Full)
-            if (U1 == 1) {
-                doDobierzKarteDlaGracza(2, 1)
-                doUstawFlagiUNO(1)
-            }
-            if (U3 == 1) {
-                doDobierzKarteDlaGracza(2, 3)
-                doUstawFlagiUNO(3)
-            }
-            if (U4 == 1) {
-                doDobierzKarteDlaGracza(2, 4)
-                doUstawFlagiUNO(4)
-            }
-        }
-        if ((U1 == 1 || (U2 == 1 || U4 == 1)) && ktoryGracz == 3) {
-            game.showLongText("Gracz 3 krzyczy UNO dla innych!", DialogLayout.Full)
-            if (U1 == 1) {
-                doDobierzKarteDlaGracza(2, 1)
-                doUstawFlagiUNO(1)
-            }
-            if (U2 == 1) {
-                doDobierzKarteDlaGracza(2, 2)
-                doUstawFlagiUNO(2)
-            }
-            if (U4 == 1) {
-                doDobierzKarteDlaGracza(2, 4)
-                doUstawFlagiUNO(4)
-            }
-        }
-        if ((U1 == 1 || (U2 == 1 || U3 == 1)) && ktoryGracz == 4) {
-            game.showLongText("Gracz 4 krzyczy UNO dla innych!", DialogLayout.Full)
-            if (U1 == 1) {
-                doDobierzKarteDlaGracza(2, 1)
-                doUstawFlagiUNO(1)
-            }
-            if (U2 == 1) {
-                doDobierzKarteDlaGracza(2, 2)
-                doUstawFlagiUNO(2)
-            }
-            if (U3 == 1) {
-                doDobierzKarteDlaGracza(2, 3)
-                doUstawFlagiUNO(3)
-            }
-        }
-        doWyswietlGracza(ktoryGracz)
     }
 })
 function doRozdajKarty (ileGraczy: number) {
@@ -1289,6 +1301,8 @@ let IlePauzy1 = 0
 let IlePauzy = 0
 let kierunek = 0
 let ktoryGracz = 0
+let Locked = 0
+Locked = 1
 ktoryGracz = 1
 kierunek = 1
 IlePauzy = 0
@@ -1308,7 +1322,7 @@ IleDobranych = 0
 gdziewybierak = 0
 IleWybranych = 0
 CzekamyNaUno = 0
-story.printCharacterText("Wybierz liczbę graczy:")
+story.printCharacterText("Wybierz liczbę graczy:", "Gra w UNO")
 story.showPlayerChoices("2", "3", "4")
 if (story.checkLastAnswer("2")) {
     IluGraczy = 2
@@ -1353,3 +1367,4 @@ kupka1.setPosition(77, 78)
 doWyswietlReke(ktoryGracz)
 doWyswietlGracza(ktoryGracz)
 game.setDialogFrame(assets.image`bialetlo`)
+Locked = 0
