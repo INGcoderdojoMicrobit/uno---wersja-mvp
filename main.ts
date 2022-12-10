@@ -1066,14 +1066,16 @@ function doRozdajKarty (ileGraczy: number) {
         reka4.pop()
     }
     doInicjujTalie()
-    reka1.unshift(1)
-    reka1.unshift(1)
-    reka2.unshift(1)
-    reka2.unshift(1)
-    reka3.unshift(1)
-    reka3.unshift(1)
-    reka4.unshift(1)
-    reka4.unshift(1)
+    for (let index61 = 0; index61 <= 8; index61++) {
+        reka1.unshift(talia.removeAt(randint(0, talia.length - 1)))
+        reka2.unshift(talia.removeAt(randint(0, talia.length - 1)))
+        if (ileGraczy > 2) {
+            reka3.unshift(talia.removeAt(randint(0, talia.length - 1)))
+        }
+        if (ileGraczy > 3) {
+            reka4.unshift(talia.removeAt(randint(0, talia.length - 1)))
+        }
+    }
 }
 function doMoveRight () {
     for (let index310 = 0; index310 <= sprites.allOfKind(SpriteKind.Player).length - 1; index310++) {
@@ -1306,7 +1308,7 @@ IleDobranych = 0
 gdziewybierak = 0
 IleWybranych = 0
 CzekamyNaUno = 0
-story.printCharacterText("Wybierz ilość graczy:")
+story.printCharacterText("Wybierz liczbę graczy:")
 story.showPlayerChoices("2", "3", "4")
 if (story.checkLastAnswer("2")) {
     IluGraczy = 2
