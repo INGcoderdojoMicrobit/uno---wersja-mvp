@@ -82,7 +82,6 @@ function doWykonajRuch () {
     if (czyWybracKolor == 1) {
         doWybierzKolorKartyNaKupce()
     } else {
-        pause(10000)
         doGraNastepny()
     }
 }
@@ -177,6 +176,22 @@ function doGraNastepny () {
     pause(1000)
     sprites.destroyAllSpritesOfKind(SpriteKind.Player, effects.disintegrate, 500)
     pause(1000)
+    if (ktoryGracz == 1 && U1 == 1 || (ktoryGracz == 2 && U2 == 1 || (ktoryGracz == 3 && U3 == 1 || ktoryGracz == 4 && U4 == 1))) {
+        CzekamyNaUno = 1
+        mySprite3 = sprites.create(assets.image`blacktlo`, SpriteKind.Enemy)
+        mySprite3.setPosition(80, 60)
+        pause(1000)
+        mySprite3.setImage(assets.image`blacktlo4`)
+        pause(1000)
+        mySprite3.setImage(assets.image`blacktlo3`)
+        pause(1000)
+        mySprite3.setImage(assets.image`blacktlo2`)
+        pause(1000)
+        mySprite3.setImage(assets.image`blacktlo1`)
+        pause(1000)
+        mySprite3.destroy()
+        CzekamyNaUno = 0
+    }
     doGraczPlusJeden()
     doPauzy()
     game.showLongText("Gra teraz " + ktoryGracz + " gracz", DialogLayout.Full)
@@ -950,88 +965,88 @@ function doPierwszaKarta () {
     }
     return pierwszaKarta
 }
-controller.A.onEvent(ControllerButtonEvent.Repeated, function () {
-    if (U1 == 1 && ktoryGracz == 1) {
-        game.showLongText("Gracz 1 krzyczy UNO!", DialogLayout.Full)
-        U1 = 2
-        textSprite5.setOutline(1, 2)
+controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (CzekamyNaUno == 1) {
+        mySprite3.setImage(assets.image`blacktloUNO`)
+        if (U1 == 1 && ktoryGracz == 1) {
+            U1 = 2
+            textSprite5.setOutline(1, 2)
+        }
+        if (U2 == 1 && ktoryGracz == 2) {
+            U2 = 2
+            textSprite6.setOutline(1, 2)
+        }
+        if (U3 == 1 && ktoryGracz == 3) {
+            U3 = 2
+            textSprite7.setOutline(1, 2)
+        }
+        if (U4 == 1 && ktoryGracz == 4) {
+            U4 = 2
+            textSprite8.setOutline(1, 2)
+        }
+    } else {
+        if ((U2 == 1 || (U3 == 1 || U4 == 1)) && ktoryGracz == 1) {
+            game.showLongText("Gracz 1 krzyczy UNO dla innych!", DialogLayout.Full)
+            if (U2 == 1) {
+                doDobierzKarteDlaGracza(2, 2)
+                doUstawFlagiUNO(2)
+            }
+            if (U3 == 1) {
+                doDobierzKarteDlaGracza(2, 3)
+                doUstawFlagiUNO(3)
+            }
+            if (U4 == 1) {
+                doDobierzKarteDlaGracza(2, 4)
+                doUstawFlagiUNO(4)
+            }
+        }
+        if ((U1 == 1 || (U3 == 1 || U4 == 1)) && ktoryGracz == 2) {
+            game.showLongText("Gracz 2 krzyczy UNO dla innych!", DialogLayout.Full)
+            if (U1 == 1) {
+                doDobierzKarteDlaGracza(2, 1)
+                doUstawFlagiUNO(1)
+            }
+            if (U3 == 1) {
+                doDobierzKarteDlaGracza(2, 3)
+                doUstawFlagiUNO(3)
+            }
+            if (U4 == 1) {
+                doDobierzKarteDlaGracza(2, 4)
+                doUstawFlagiUNO(4)
+            }
+        }
+        if ((U1 == 1 || (U2 == 1 || U4 == 1)) && ktoryGracz == 3) {
+            game.showLongText("Gracz 3 krzyczy UNO dla innych!", DialogLayout.Full)
+            if (U1 == 1) {
+                doDobierzKarteDlaGracza(2, 1)
+                doUstawFlagiUNO(1)
+            }
+            if (U2 == 1) {
+                doDobierzKarteDlaGracza(2, 2)
+                doUstawFlagiUNO(2)
+            }
+            if (U4 == 1) {
+                doDobierzKarteDlaGracza(2, 4)
+                doUstawFlagiUNO(4)
+            }
+        }
+        if ((U1 == 1 || (U2 == 1 || U3 == 1)) && ktoryGracz == 4) {
+            game.showLongText("Gracz 4 krzyczy UNO dla innych!", DialogLayout.Full)
+            if (U1 == 1) {
+                doDobierzKarteDlaGracza(2, 1)
+                doUstawFlagiUNO(1)
+            }
+            if (U2 == 1) {
+                doDobierzKarteDlaGracza(2, 2)
+                doUstawFlagiUNO(2)
+            }
+            if (U3 == 1) {
+                doDobierzKarteDlaGracza(2, 3)
+                doUstawFlagiUNO(3)
+            }
+        }
+        doWyswietlGracza(ktoryGracz)
     }
-    if (U2 == 1 && ktoryGracz == 2) {
-        game.showLongText("Gracz 2 krzyczy UNO!", DialogLayout.Full)
-        U2 = 2
-        textSprite6.setOutline(1, 2)
-    }
-    if (U3 == 1 && ktoryGracz == 3) {
-        game.showLongText("Gracz 3 krzyczy UNO!", DialogLayout.Full)
-        U3 = 2
-        textSprite7.setOutline(1, 2)
-    }
-    if (U4 == 1 && ktoryGracz == 4) {
-        game.showLongText("Gracz 4 krzyczy UNO!", DialogLayout.Full)
-        U4 = 2
-        textSprite8.setOutline(1, 2)
-    }
-    if ((U2 == 1 || (U3 == 1 || U4 == 1)) && ktoryGracz == 1) {
-        game.showLongText("Gracz 1 krzyczy UNO dla innych!", DialogLayout.Full)
-        if (U2 == 1) {
-            doDobierzKarteDlaGracza(2, 2)
-            doUstawFlagiUNO(2)
-        }
-        if (U3 == 1) {
-            doDobierzKarteDlaGracza(2, 3)
-            doUstawFlagiUNO(3)
-        }
-        if (U4 == 1) {
-            doDobierzKarteDlaGracza(2, 4)
-            doUstawFlagiUNO(4)
-        }
-    }
-    if ((U1 == 1 || (U3 == 1 || U4 == 1)) && ktoryGracz == 2) {
-        game.showLongText("Gracz 2 krzyczy UNO dla innych!", DialogLayout.Full)
-        if (U1 == 1) {
-            doDobierzKarteDlaGracza(2, 1)
-            doUstawFlagiUNO(1)
-        }
-        if (U3 == 1) {
-            doDobierzKarteDlaGracza(2, 3)
-            doUstawFlagiUNO(3)
-        }
-        if (U4 == 1) {
-            doDobierzKarteDlaGracza(2, 4)
-            doUstawFlagiUNO(4)
-        }
-    }
-    if ((U1 == 1 || (U2 == 1 || U4 == 1)) && ktoryGracz == 3) {
-        game.showLongText("Gracz 3 krzyczy UNO dla innych!", DialogLayout.Full)
-        if (U1 == 1) {
-            doDobierzKarteDlaGracza(2, 1)
-            doUstawFlagiUNO(1)
-        }
-        if (U2 == 1) {
-            doDobierzKarteDlaGracza(2, 2)
-            doUstawFlagiUNO(2)
-        }
-        if (U4 == 1) {
-            doDobierzKarteDlaGracza(2, 4)
-            doUstawFlagiUNO(4)
-        }
-    }
-    if ((U1 == 1 || (U2 == 1 || U3 == 1)) && ktoryGracz == 4) {
-        game.showLongText("Gracz 4 krzyczy UNO dla innych!", DialogLayout.Full)
-        if (U1 == 1) {
-            doDobierzKarteDlaGracza(2, 1)
-            doUstawFlagiUNO(1)
-        }
-        if (U2 == 1) {
-            doDobierzKarteDlaGracza(2, 2)
-            doUstawFlagiUNO(2)
-        }
-        if (U3 == 1) {
-            doDobierzKarteDlaGracza(2, 3)
-            doUstawFlagiUNO(3)
-        }
-    }
-    doWyswietlGracza(ktoryGracz)
 })
 function doRozdajKarty (ileGraczy: number) {
     for (let index572 = 0; index572 <= reka1.length - 1; index572++) {
@@ -1226,6 +1241,8 @@ let KoniecPauzy = false
 let mySprite: Sprite = null
 let kartalosowana = 0
 let koniecPetli = 0
+let mySprite3: Sprite = null
+let CzekamyNaUno = 0
 let mySprite2: Sprite = null
 let komunikat = ""
 let czyZlaKarta = 0
