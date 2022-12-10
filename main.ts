@@ -163,8 +163,12 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             }
         }
     } else {
-        czyWybracKolor = 0
-        doGraNastepny()
+        if (KartaNaKupce != 0 && KartaNaKupce != 1) {
+            czyWybracKolor = 0
+            doGraNastepny()
+        } else {
+            game.showLongText("Musisz wybrać kolor!", DialogLayout.Full)
+        }
     }
 })
 function doGraNastepny () {
