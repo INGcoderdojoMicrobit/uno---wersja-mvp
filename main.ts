@@ -784,29 +784,37 @@ function doWyswietlGracza (numerGracza: number) {
         textGracz2.setText("<--")
     }
     if (U1 == 2) {
+        textSprite5.setText("1")
         textSprite5.setOutline(1, 2)
     } else if (U1 == 1) {
+        textSprite5.setText("1")
         textSprite5.setOutline(1, 15)
     } else {
         textSprite5.setText("")
     }
     if (U2 == 2) {
+        textSprite6.setText("1")
         textSprite6.setOutline(1, 2)
     } else if (U2 == 1) {
+        textSprite6.setText("1")
         textSprite6.setOutline(1, 15)
     } else {
         textSprite6.setText("")
     }
     if (U3 == 2) {
+        textSprite7.setText("1")
         textSprite7.setOutline(1, 2)
     } else if (U3 == 1) {
+        textSprite7.setText("1")
         textSprite7.setOutline(1, 15)
     } else {
         textSprite7.setText("")
     }
     if (U4 == 2) {
+        textSprite8.setText("1")
         textSprite8.setOutline(1, 2)
     } else if (U4 == 1) {
+        textSprite8.setText("1")
         textSprite8.setOutline(1, 15)
     } else {
         textSprite8.setText("")
