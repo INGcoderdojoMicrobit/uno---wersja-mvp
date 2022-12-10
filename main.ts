@@ -1,11 +1,13 @@
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Locked == 0) {
-        for (let value of sprites.allOfKind(SpriteKind.Player)) {
-            if (wybierak.x == value.x) {
-                value.y = 16
-                wybierak.y = 16
-                WybraneKarty[iterator] = 0
-                IleWybranych += -1
+        if (IleWybranych > 0) {
+            for (let value of sprites.allOfKind(SpriteKind.Player)) {
+                if (wybierak.x == value.x) {
+                    value.y = 16
+                    wybierak.y = 16
+                    WybraneKarty[iterator] = 0
+                    IleWybranych += -1
+                }
             }
         }
     }
@@ -1259,7 +1261,6 @@ let KoniecPauzy = false
 let mySprite: Sprite = null
 let kartalosowana = 0
 let koniecPetli = 0
-let mySprite3: Sprite = null
 let mySprite2: Sprite = null
 let komunikat = ""
 let czyZlaKarta = 0
@@ -1282,6 +1283,7 @@ let textGracz1: TextSprite = null
 let gracz1: Sprite = null
 let wybierak: Sprite = null
 let IluGraczy = 0
+let mySprite3: Sprite = null
 let CzekamyNaUno = 0
 let IleWybranych = 0
 let gdziewybierak = 0
@@ -1322,6 +1324,10 @@ IleDobranych = 0
 gdziewybierak = 0
 IleWybranych = 0
 CzekamyNaUno = 0
+mySprite3 = sprites.create(assets.image`blacktloUNOGRA`, SpriteKind.Player)
+pause(5000)
+mySprite3.destroy(effects.disintegrate, 500)
+pause(1000)
 story.printCharacterText("Wybierz liczbę graczy:", "Gra w UNO")
 story.showPlayerChoices("2", "3", "4")
 if (story.checkLastAnswer("2")) {
