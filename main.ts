@@ -1246,7 +1246,6 @@ let mySprite: Sprite = null
 let kartalosowana = 0
 let koniecPetli = 0
 let mySprite3: Sprite = null
-let CzekamyNaUno = 0
 let mySprite2: Sprite = null
 let komunikat = ""
 let czyZlaKarta = 0
@@ -1255,17 +1254,8 @@ let reka3: number[] = []
 let reka2: number[] = []
 let reka1: number[] = []
 let wyswreka: number[] = []
-let czyWybracKolor = 0
 let kupka1: Sprite = null
 let KartaNaKupce = 0
-let IluGraczy = 0
-let IlePauzy4 = 0
-let IlePauzy3 = 0
-let IlePauzy2 = 0
-let IlePauzy1 = 0
-let IlePauzy = 0
-let kierunek = 0
-let ktoryGracz = 0
 let textSprite8: TextSprite = null
 let textSprite7: TextSprite = null
 let textSprite6: TextSprite = null
@@ -1277,6 +1267,8 @@ let textGracz2: TextSprite = null
 let textGracz1: TextSprite = null
 let gracz1: Sprite = null
 let wybierak: Sprite = null
+let IluGraczy = 0
+let CzekamyNaUno = 0
 let IleWybranych = 0
 let gdziewybierak = 0
 let IleDobranych = 0
@@ -1287,6 +1279,22 @@ let U4 = 0
 let U3 = 0
 let U2 = 0
 let U1 = 0
+let czyWybracKolor = 0
+let IlePauzy4 = 0
+let IlePauzy3 = 0
+let IlePauzy2 = 0
+let IlePauzy1 = 0
+let IlePauzy = 0
+let kierunek = 0
+let ktoryGracz = 0
+ktoryGracz = 1
+kierunek = 1
+IlePauzy = 0
+IlePauzy1 = 0
+IlePauzy2 = 0
+IlePauzy3 = 0
+IlePauzy4 = 0
+czyWybracKolor = 0
 U1 = 0
 U2 = 0
 U3 = 0
@@ -1297,6 +1305,16 @@ iterator = 0
 IleDobranych = 0
 gdziewybierak = 0
 IleWybranych = 0
+CzekamyNaUno = 0
+story.printCharacterText("Wybierz ilość graczy:")
+story.showPlayerChoices("2", "3", "4")
+if (story.checkLastAnswer("2")) {
+    IluGraczy = 2
+} else if (story.checkLastAnswer("3")) {
+    IluGraczy = 3
+} else {
+    IluGraczy = 4
+}
 wybierak = sprites.create(assets.image`selector_off`, SpriteKind.Enemy)
 wybierak.z = 1
 wybierak.setPosition(8 + gdziewybierak * 18, 16)
@@ -1326,19 +1344,10 @@ textSprite7 = textsprite.create("3", 0, 1)
 textSprite7.setPosition(140, 67)
 textSprite8 = textsprite.create("4", 0, 1)
 textSprite8.setPosition(152, 67)
-ktoryGracz = 1
-kierunek = 1
-IlePauzy = 0
-IlePauzy1 = 0
-IlePauzy2 = 0
-IlePauzy3 = 0
-IlePauzy4 = 0
-IluGraczy = 4
-doRozdajKarty(4)
+doRozdajKarty(IluGraczy)
 KartaNaKupce = doPierwszaKarta()
 kupka1 = sprites.create(doDajObrazek(KartaNaKupce), SpriteKind.Enemy)
 kupka1.setPosition(77, 78)
 doWyswietlReke(ktoryGracz)
 doWyswietlGracza(ktoryGracz)
 game.setDialogFrame(assets.image`bialetlo`)
-czyWybracKolor = 0
